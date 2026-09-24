@@ -1,12 +1,12 @@
 # Brief completion
 
-The later requests supersede the original panda/lion/mantis list, no-3D constraint and discovery-first entrance. The current brief uses the three Australian species, the supplied 3D illustrations and a global country-photo entrance.
+The later requests supersede the original panda/lion/mantis list and discovery-first entrance. The latest brief uses real photographs of the three Australian species with clickable white nodes and inline information tiles, plus a global 3D country-photo entrance. Animal GLBs are retained for optional reuse, not loaded.
 
 ## Implemented
 
 - Cloned Kylektt/animalpedia; updated the application and README.
 - Central Animalia title, country photography, flags, scroll-driven entrance and searchable 250-country/territory index. Only Australia is enabled.
-- South Australia collection with three scroll-linked species chapters and interactive released GLBs.
+- South Australia collection with three scroll-linked photographic species chapters. Nodes open sourced tiles beside the image on desktop and below it on mobile; the image stays unobscured.
 - Native habitat video, playback controls, failure/retry states, credited media and photographic fallback when footage is unavailable.
 - Three sourced, image-relative anatomy points per species. Anatomy stops video; returning retains the chosen clip and starts paused and muted.
 - Configured video segments bound the seek range and stop at their end. Clip switching retains mute preference within Habitat.
@@ -24,7 +24,7 @@ The original dark halo was superseded by the later white photographic reference 
 
 ## Hosting
 
-The latest revision adds real Three.js camera-depth country travel and surface-anchored white model nodes with sourced body-part facts. See `model-points.ts` and the model integration handoff.
+The latest revision keeps Three.js camera-depth country travel and replaces the animal model stage with photographs and nine white body-part nodes. See `AnimalEncounter.tsx`, `animals.ts` and the media handoff.
 
 Public preview: https://vrutikgoswami.github.io/animalpedia/
 

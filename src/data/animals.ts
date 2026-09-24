@@ -16,6 +16,13 @@ export const animals: Animal[] = [
     media: media.kangaroo,
     sources: [
       {
+        id: 'kangaroo-unsw',
+        title: 'Kangaroos use tail as fifth leg',
+        publisher: 'UNSW',
+        url: 'https://www.unsw.edu.au/newsroom/news/2014/07/kangaroos-use-tail-as-fifth-leg',
+        accessedAt: '2026-09-24',
+      },
+      {
         id: 'kangaroo-zoo',
         title: 'Red kangaroo: identification and diet',
         publisher: 'Perth Zoo',
@@ -33,30 +40,30 @@ export const animals: Animal[] = [
     hotspots: [
       {
         id: 'muzzle',
-        x: 12,
-        y: 71,
+        x: 54,
+        y: 48,
         title: 'Marked muzzle',
         description:
-          'Black-and-white muzzle markings help distinguish red kangaroos from grey kangaroos. This grazing animal holds its muzzle close to the grass.',
+          'Black-and-white markings around the muzzle help distinguish red kangaroos from grey kangaroos. They graze on grasses and other soft plants.',
         sourceId: 'kangaroo-zoo',
       },
       {
-        id: 'coat',
-        x: 53,
-        y: 22,
-        title: 'Reddish coat',
+        id: 'hindlegs',
+        x: 63,
+        y: 60,
+        title: 'Powerful hind legs',
         description:
-          'Red kangaroos have a reddish-brown coat with a pale belly. This photograph shows an animal grazing in a zoo enclosure.',
-        sourceId: 'kangaroo-zoo',
+          'Large hind limbs power the hop. At a slow grazing pace, both hind feet move forward together while the forelimbs and tail support the body.',
+        sourceId: 'kangaroo-unsw',
       },
       {
         id: 'tail',
         x: 81,
-        y: 60,
+        y: 77,
         title: 'Muscular tail',
         description:
-          'A long, strong tail is a characteristic feature of the red kangaroo.',
-        sourceId: 'kangaroo-zoo',
+          'More than a counterbalance: the muscular tail acts as a fifth leg during slow walking, providing propulsion as well as support.',
+        sourceId: 'kangaroo-unsw',
       },
     ],
   },
@@ -91,8 +98,8 @@ export const animals: Animal[] = [
     hotspots: [
       {
         id: 'eyes',
-        x: 44,
-        y: 60,
+        x: 64,
+        y: 61,
         title: 'Dark eyes',
         description:
           'Large, dark eyes are a characteristic feature of this nocturnal desert rodent. During daylight it shelters in burrows.',
@@ -100,8 +107,8 @@ export const animals: Animal[] = [
       },
       {
         id: 'ears',
-        x: 33,
-        y: 25,
+        x: 56,
+        y: 44,
         title: 'Upright ears',
         description:
           'The upright ears are clearly visible above the head in this photograph. In newborn spinifex hopping mice, the ears open at about 15 days old.',
@@ -109,11 +116,11 @@ export const animals: Animal[] = [
       },
       {
         id: 'coat',
-        x: 69,
-        y: 45,
+        x: 42,
+        y: 66,
         title: 'Coat and colour',
         description:
-          'The natural coat is light brown with a grey-to-white underside. The red colour in this photograph comes from nocturnal-house lighting.',
+          'Light-brown fur covers the back, contrasting with a grey-to-white underside. The foreground mouse shows this change in colour along its flank.',
         sourceId: 'mouse-nt',
       },
     ],

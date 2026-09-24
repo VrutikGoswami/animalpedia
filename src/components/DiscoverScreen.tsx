@@ -1,13 +1,11 @@
-import { lazy, Suspense, useRef } from 'react'
-import { ArrowDown, ArrowUpRight, ArrowRight, MapPin } from 'lucide-react'
+import { useRef } from 'react'
+import { ArrowDown, MapPin } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { AnimalImage } from './AnimalImage'
 import type { Animal } from '../types'
-import { models } from '../data/models'
-
-const ModelViewer = lazy(() => import('./ModelViewer'))
+import { AnimalEncounter } from './AnimalEncounter'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -17,14 +15,12 @@ export function DiscoverScreen({
   onActive,
   onOpen,
   goTo,
-  suspended = false,
 }: {
   animals: Animal[]
   active: number
   onActive: (index: number) => void
   onOpen: (index: number, mode: 'details' | 'habitat' | 'anatomy') => void
   goTo: (index: number) => void
-  suspended?: boolean
 }) {
   const root = useRef<HTMLDivElement>(null)
   useGSAP(
@@ -37,9 +33,9 @@ export function DiscoverScreen({
       mm.add(
         {
           cinematic:
-            '(min-width: 1020px) and (min-height: 650px) and (prefers-reduced-motion: no-preference)',
+            '(min-width: 1020px) and (min-height: 800px) and (prefers-reduced-motion: no-preference)',
           standard:
-            '(max-width: 1019px), (max-height: 649px), (prefers-reduced-motion: reduce)',
+            '(max-width: 1019px), (max-height: 799px), (prefers-reduced-motion: reduce)',
         },
         (context) => {
           const stage =
@@ -159,11 +155,7 @@ export function DiscoverScreen({
           >
             <div className="rail-image">
               <AnimalImage
-                asset={
-                  animal.media.thumbnail ??
-                  models[animal.id]?.poster ??
-                  animal.media.discovery
-                }
+                asset={animal.media.thumbnail ?? animal.media.discovery}
                 name={animal.commonName}
                 index={index}
                 small
@@ -196,62 +188,10 @@ export function DiscoverScreen({
               </span>
               <span>Field notes, 0{index + 1}</span>
             </div>
-            <div className="chapter-body">
-              <div className="chapter-copy">
-                <p className="eyebrow">{animal.chapter}</p>
-                <h1 id={`${animal.id}-title`}>{animal.commonName}</h1>
-                <p className="scientific-name">{animal.scientificName}</p>
-                <p className="intro-copy">{animal.introduction}</p>
-                <p className="habitat-label">
-                  {animal.habitatLabel} <span aria-hidden="true">/</span>{' '}
-                  {animal.region}
-                </p>
-                <button
-                  className="primary-button"
-                  onClick={() => onOpen(index, 'habitat')}
-                >
-                  Explore habitat <ArrowRight size={19} aria-hidden="true" />
-                </button>
-                <button
-                  className="underlined-button"
-                  onClick={() => onOpen(index, 'details')}
-                >
-                  Meet the species <ArrowUpRight size={15} aria-hidden="true" />
-                </button>
-              </div>
-              <div className="chapter-visual">
-                {active === index && !suspended && models[animal.id] ? (
-                  <Suspense
-                    fallback={
-                      <AnimalImage
-                        asset={models[animal.id].poster}
-                        name={animal.commonName}
-                        index={index}
-                      />
-                    }
-                  >
-                    <ModelViewer
-                      model={models[animal.id]}
-                      name={animal.commonName}
-                    />
-                  </Suspense>
-                ) : (
-                  <AnimalImage
-                    asset={models[animal.id]?.poster ?? animal.media.discovery}
-                    name={animal.commonName}
-                    index={index}
-                  />
-                )}
-                <button
-                  className="visual-label"
-                  aria-label={`Meet ${animal.commonName}`}
-                  onClick={() => onOpen(index, 'details')}
-                >
-                  <span>{animal.shortName}</span>
-                  <ArrowUpRight size={18} aria-hidden="true" />
-                </button>
-              </div>
-            </div>
+            <AnimalEncounter
+              animal={animal}
+              onOpen={(mode) => onOpen(index, mode)}
+            />
             <div className="chapter-bottomline">
               <span>
                 01 collection <span className="separator">/</span> 03 encounters

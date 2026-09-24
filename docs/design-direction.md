@@ -14,7 +14,7 @@ The [Beautiful Universe reference](https://www.beautifuluniverse.cc/) was inspec
 
 The desktop gallery is pinned for a finite native-scroll distance. Direct species buttons move to chapter positions. Inactive chapters are inert and hidden from assistive technology. Animation contexts are reverted on unmount and breakpoint changes. There is no continuous autoplay or wheel hijacking.
 
-At widths below 1020px, heights below 650px, and with reduced motion enabled, chapters use normal document flow. The mobile selector is horizontal; typography uses explicit sizes rather than viewport-based font sizing.
+At widths below 1020px, heights below 800px, and with reduced motion enabled, chapters use normal document flow. The mobile selector is horizontal; typography uses explicit sizes rather than viewport-based font sizing.
 
 ## Navigation
 
@@ -28,6 +28,6 @@ Frontend owner: layout, transitions, view state, controls, responsive behaviour,
 
 Media owner: correct species photography, habitat footage, posters, attribution/licences, optional captions, and final anatomy stills. Factual hotspot notes must link to reliable sources. Coordinates can be approved only after the still is fixed.
 
-The released original animal models now render through a lazy-loaded Three.js viewer on the unframed discovery stage. Only the active animal has a canvas; closing the collection or opening a dialog disposes its renderer, geometry, materials and textures. Drag and icon controls handle inspection, while optional rotation starts paused and stops when reduced motion is enabled. Original posters provide loading/error fallbacks and species thumbnails. These are static illustrations, not scientific anatomical models. See model-integration.md for provenance and verification.
+The latest brief replaces animal models with real photographs in their surroundings. White body-part dots open one sourced tile in the left text column, beside the image. On mobile, the tile sits directly below the photograph. The image retains its aspect ratio and size when a tile opens. Tiles are inline, not dialogs; Escape or their close control returns focus to the selected dot. Original models and provenance remain archived for optional reuse, but the animal pages no longer load them. The country entrance still uses Three.js.
 
 No account system, AI service or backend is part of this implementation. The user subsequently requested public deployment; the preview is hosted on GitHub Pages through the authenticated account's fork.

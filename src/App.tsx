@@ -75,7 +75,6 @@ export default function App() {
       />
       {australia ? (
         <DiscoverScreen
-          suspended={Boolean(opened || directory || about)}
           animals={animals}
           active={active}
           onActive={onActive}

@@ -41,13 +41,13 @@ Browser tests use Microsoft Edge by default. On a machine without Edge, run `npx
 
 ## Media handoff
 
-**All three released 3D illustrations, species photographs and sourced field-note hotspots are integrated.** Red-kangaroo and sea-lion videos play locally at 1080p. The mouse now has an official Zoos Victoria YouTube embed, retaining its own player and branding; no streaming footage is downloaded. White dots on each model open body-part facts with sources and follow the surface as it rotates. No substitute species or generated behaviour are displayed.
+**The animal stage now uses real photographs with white body-part nodes.** Each node opens a sourced information tile beside the photograph on desktop and directly below it on mobile, without a modal or covering the image. Close and Escape restore node focus; image failures hide nodes and offer retry. The country entrance keeps its 3D depth animation. Red-kangaroo and sea-lion videos play locally at 1080p; mouse Habitat retains the official Zoos Victoria YouTube embed.
 
 Country photography and all flags are already included locally under `public/assets/countries/` and `public/assets/flags/`. Per-photo creators, source pages and licences are in `src/data/country-photos.json` and the in-app country index's credits. See [country assets](docs/country-assets.md).
 
-The [animal-cards-v0.1.0 release](https://github.com/Kylektt/animalpedia/releases/tag/animal-cards-v0.1.0) supplies red kangaroo, spinifex hopping mouse and Australian sea lion GLBs, posters and provenance. The Three.js stage supports dragging, rotate buttons, zoom, reset and optional rotation. Rotation starts paused. Only the active animal mounts a renderer; dialogs and navigation dispose it. A supplied poster remains visible during loading or errors, with a retry action. These static project illustrations are not anatomical scans or locomotion animations. See [model integration](docs/model-integration.md).
+The [animal-cards-v0.1.0 release](https://github.com/Kylektt/animalpedia/releases/tag/animal-cards-v0.1.0) GLBs, posters, provenance and original viewer remain in the repository for optional future reuse. They are no longer mounted or downloaded by the animal experience. These static project illustrations are not anatomical scans. See [model integration](docs/model-integration.md) for the historical implementation.
 
-Both release archives were downloaded and SHA-256 verified under ignored `.artifacts/`. Selected mouse and sea-lion photographs are integrated with their credits. Sea-lion video 02 is upgraded to its Commons 1080p transcode and depicts Baird Bay, South Australia, including dolphins. The pack's eastern-grey-kangaroo media and sea-lion video 01 (unresolved licence review) remain excluded. A separately sourced red-kangaroo photograph and 1080p zoo clip are explicitly labelled as captive observations, not wild South Australian habitat. See [integrated field media](docs/field-media.md).
+Both release archives were downloaded and SHA-256 verified under ignored `.artifacts/`. The new kangaroo photograph shows Brookfield Conservation Park, South Australia (Donald Hobern, CC BY 2.0). The mouse photograph shows naturally coloured hopping mice among leaf litter (Stephen Michael Barnett, CC BY 2.0); the source does not establish location or wild status, and the caption explicitly says so. The sea lion rests on the beach at Seal Bay. All photo coordinates are matched to these complete, uncropped images. Sea-lion video 02 is the Commons 1080p transcode from Baird Bay, including dolphins. The red-kangaroo video remains an explicitly labelled zoo observation. The pack's eastern-grey media and unreviewed sea-lion video 01 remain excluded. See [integrated field media](docs/field-media.md).
 
 1. Put approved files under `public/assets/kangaroo/`, `spinifex-mouse/`, or `australian-sea-lion/`.
 2. Populate [`src/data/media.ts`](src/data/media.ts) with paths, useful alt text, creator, source and licence.
@@ -72,7 +72,8 @@ src/
   data/country-photos.json    # Featured photography and attribution
   components/
     DiscoverScreen.tsx        # Scroll gallery and species index
-    ModelViewer.tsx           # Lazy Three.js viewer and resource lifecycle
+    AnimalEncounter.tsx       # Habitat photograph, nodes and inline detail tile
+    ModelViewer.tsx           # Retained optional viewer; not mounted
     CountryLanding.tsx        # Scroll-driven world entrance
     CountryDirectory.tsx      # Search, country flags and credits
     Header.tsx                # World / collection navigation
@@ -83,10 +84,10 @@ src/
     Modal.tsx                 # Accessible native dialog
 tests/journey.spec.ts         # Browser acceptance checks
 tests/world.spec.ts           # Country entrance and navigation checks
-tests/models.spec.ts          # Canvas pixels, controls, disposal and retry
+tests/photos.spec.ts          # Node alignment, side tiles, focus and photo retry
 ```
 
-Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Lucide icons. No backend, database or runtime AI. npm's lockfile pins installed versions. Three.js is shared by the lazy country scene and animal viewer; its chunk still produces a size warning. Each original GLB is approximately 11-13 MB, so compression/LOD is a future production optimization.
+Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Lucide icons. No backend, database or runtime AI. npm's lockfile pins installed versions. Three.js is lazy-loaded for the country scene; its chunk still produces a size warning. Original GLBs are retained as static files but are not requested during the photo experience.
 
 ## Verification and limits
 
@@ -94,7 +95,7 @@ See [brief completion and remaining media](docs/brief-status.md) for the reconci
 
 Browser acceptance tests cover the world entrance, loaded country photographs, full directory, search, Australia-only activation, browser history, reversible scrolling, all species, modal Escape/focus restoration, reduced motion, missing media, and injected broken-media retry at 1440px and 390px. Test screenshots and traces are written to ignored `test-results/`.
 
-Model checks include GLB structure and hash verification (`node scripts/verify-models.mjs`), desktop/mobile canvas-pixel coverage and framing, rotation/zoom/reset, optional rotation, fallback/retry and disposal on navigation. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.
+Photo checks cover all nine nodes, desktop-side/mobile-below tile placement, stable photo bounds, no open modal or GLB downloads, keyboard selection, Escape/close focus restoration, failed-image retry, and narrow/short layouts. Country canvas-pixel and reversible-depth tests remain. Original model integrity can still be checked with `node scripts/verify-models.mjs`. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.
 
 The kangaroo is a red kangaroo; do not substitute the archive's eastern-grey media. Photo and model points are educational body-region notes, not scientific anatomical segmentation. Wild red-kangaroo footage remains desirable. Mouse playback requires YouTube access; a direct Watch on YouTube link and reload control remain available. Google Fonts is optional; local serif and sans-serif fallbacks keep the interface usable offline. The HD sea-lion film is about 69 MB; production should add adaptive delivery.
 

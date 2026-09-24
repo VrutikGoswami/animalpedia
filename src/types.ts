@@ -14,6 +14,9 @@ export interface Credit {
 export interface Still {
   src: string
   alt: string
+  width?: number
+  height?: number
+  caption?: string
   kind: 'cutout' | 'photo' | 'illustration'
   credit: Credit
 }

@@ -1,5 +1,7 @@
 # Released animal models
 
+**Historical implementation:** the latest request replaces animal models with real photographs and inline side tiles. `ModelViewer.tsx` and original assets are retained for optional reuse, but are not mounted or requested by the current animal experience. The renderer description below records the former integration. Current UI coverage is in `tests/photos.spec.ts`; the original hash verifier remains available.
+
 Source: [Original animal cards v0.1.0](https://github.com/Kylektt/animalpedia/releases/tag/animal-cards-v0.1.0), downloaded 24 September 2026. The ZIP's SHA-256 matched `f3ce2727304ee17eca497a9e07cb92c5b4b463021bb18f5c4c011c5d9e5ddb9d`.
 
 The separate [animal media pack](https://github.com/Kylektt/animalpedia/releases/tag/media-pack-2026-09-24) supplies selected field photographs and the source for the sea-lion film; see [field media](field-media.md). Its ZIP hash matched `77a325973ef82605b68531b2da6416c704122c53d212a68d8ecc27652373a479`. Both complete archives remain in ignored `.artifacts/`; only selected assets ship with the site.

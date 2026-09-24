@@ -1,4 +1,22 @@
 {
+  "kangaroo-habitat": {
+    "src": "/assets/kangaroo/habitat.jpg",
+    "creator": "Donald Hobern",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Macropus_rufus_(30751827488).jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Macropus_rufus_%2830751827488%29.jpg",
+    "description": "Red kangaroos at Brookfield Conservation Park, Blanchetown, South Australia, 15 August 2018. Original photograph; no image edits."
+  },
+  "mouse-habitat": {
+    "src": "/assets/spinifex-mouse/habitat.jpg",
+    "creator": "Stephen Michael Barnett",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Kangaroo_Mouse.jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "download_url": "https://live.staticflickr.com/220/519649900_01cb254674_o.jpg",
+    "description": "Hopping mice beside a rock on leaf litter. Commons classifies this photograph as Notomys alexis. The photographer does not establish the location or wild status; not presented as verified wild South Australian habitat. Original photograph; no image edits."
+  },
   "mouse": {
     "src": "/assets/spinifex-mouse/field.jpg",
     "file": "images/01_spinifex_hopping_mouse.jpg",

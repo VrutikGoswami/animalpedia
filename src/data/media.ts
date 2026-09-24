@@ -19,18 +19,33 @@ function still(id: keyof typeof sources, alt: string): Still {
     credit: credit(id),
   }
 }
-const kangaroo = still(
-  'kangaroo-photo',
-  'Red kangaroo grazing at Binder Park Zoo, Michigan. Photograph by Ltshears.',
-)
-const mouse = still(
-  'mouse',
-  'Spinifex hopping mouse under red nocturnal-house lighting at Taronga Zoo, Sydney. Photograph by Sardaka.',
-)
-const seaLion = still(
-  'sea-lion',
-  'Australian sea lion resting at Seal Bay, Kangaroo Island, South Australia. Photograph by Peterdownunder.',
-)
+const kangaroo: Still = {
+  ...still(
+    'kangaroo-habitat',
+    'Two red kangaroos in grassland at Brookfield Conservation Park, South Australia. Photograph by Donald Hobern.',
+  ),
+  width: 4760,
+  height: 3570,
+  caption: 'Brookfield Conservation Park, South Australia',
+}
+const mouse: Still = {
+  ...still(
+    'mouse-habitat',
+    'Two spinifex hopping mice beside a rock on leaf litter. Photograph by Stephen Michael Barnett; location and wild status unverified.',
+  ),
+  width: 2754,
+  height: 1747,
+  caption: 'Photographic observation / location and wild status unverified',
+}
+const seaLion: Still = {
+  ...still(
+    'sea-lion',
+    'Australian sea lion resting at Seal Bay, Kangaroo Island, South Australia. Photograph by Peterdownunder.',
+  ),
+  width: 1920,
+  height: 1440,
+  caption: 'Seal Bay, Kangaroo Island, South Australia',
+}
 
 export const media: Record<string, AnimalMedia> = {
   kangaroo: {
@@ -69,14 +84,11 @@ export const media: Record<string, AnimalMedia> = {
       },
     },
     discovery: mouse,
-    thumbnail: still(
-      'mouse-natural',
-      'Spinifex hopping mouse at Sydney Wildlife World. Photograph by Dcoetzee.',
-    ),
+    thumbnail: mouse,
     anatomy: mouse,
     poster: mouse,
     habitatNote:
-      'Taronga Zoo, Sydney. Red lighting in the nocturnal house; this is a captive photographic observation.',
+      'Photographic observation by Stephen Michael Barnett. Location and wild status are not established by the source.',
     clips: [],
   },
   'australian-sea-lion': {

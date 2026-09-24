@@ -5,7 +5,6 @@ import { AnimalImage } from './AnimalImage'
 import { Anatomy } from './Anatomy'
 import { HabitatPlayer } from './HabitatPlayer'
 import type { Animal } from '../types'
-import { models } from '../data/models'
 
 export type AnimalMode = 'details' | 'habitat' | 'anatomy'
 export function AnimalDialog({
@@ -24,7 +23,6 @@ export function AnimalDialog({
   const [selectedClip, setSelectedClip] = useState(0)
   const allCredits = [
     animal.media.embed?.credit,
-    models[animal.id]?.poster.credit,
     animal.media.discovery?.credit,
     animal.media.anatomy?.credit,
     animal.media.poster?.credit,
@@ -70,9 +68,7 @@ export function AnimalDialog({
         <div className="species-overview">
           <div className="overview-image">
             <AnimalImage
-              asset={
-                animal.media.discovery ?? models[animal.id]?.poster ?? null
-              }
+              asset={animal.media.discovery}
               name={animal.commonName}
               index={index}
             />

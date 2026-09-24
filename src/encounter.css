@@ -1,0 +1,314 @@
+.encounter.chapter-body {
+  grid-template-columns: minmax(280px, 0.65fr) minmax(0, 1.35fr);
+  gap: 32px;
+}
+.encounter .chapter-copy {
+  padding-right: 0;
+  max-width: none;
+}
+.encounter .chapter-copy h1 {
+  font-size: 76px;
+  max-width: none;
+}
+.chapter-1 .encounter h1 {
+  font-size: 60px;
+}
+.chapter-2 .encounter h1 {
+  font-size: 68px;
+}
+.encounter .chapter-visual {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+.encounter-figure {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+.cinematic .encounter-figure {
+  max-width: calc((100svh - 335px) * var(--photo-ratio));
+  align-self: center;
+}
+.encounter-photo {
+  width: 100%;
+  position: relative;
+  background: #e9ede8;
+}
+.encounter-photo > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.encounter-figure figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.encounter-photo-credit {
+  font-size: 10px;
+}
+.encounter-photo-credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.photo-node {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: transparent;
+  z-index: 2;
+}
+.photo-node-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+  box-shadow:
+    0 0 0 5px #1d29293d,
+    0 0 0 6px #ffffff85;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.photo-node:hover .photo-node-dot,
+.photo-node[aria-expanded='true'] .photo-node-dot {
+  transform: scale(1.2);
+  box-shadow:
+    0 0 0 6px #24392c99,
+    0 0 0 7px white;
+}
+.photo-node-label {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #202b24;
+  color: white;
+  border-radius: 3px;
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 6px 9px;
+  width: max-content;
+  max-width: 130px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.photo-node:hover .photo-node-label,
+.photo-node:focus-visible .photo-node-label {
+  opacity: 1;
+}
+.encounter-note-slot {
+  min-height: 245px;
+  margin: 20px 0;
+  display: grid;
+  align-items: center;
+}
+.encounter-introduction .intro-copy {
+  margin-top: 0;
+}
+.encounter-introduction .habitat-label {
+  margin-bottom: 0;
+}
+.body-note-tile {
+  scroll-margin: 170px 0 80px;
+  position: relative;
+  border: 1px solid #ccd6ca;
+  border-left: 3px solid var(--accent);
+  background: #f0f4ee;
+  border-radius: 4px;
+  padding: 10px 18px 18px;
+  animation: note-reveal 0.22s ease-out;
+}
+.body-note-topline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--accent);
+}
+.body-note-topline .micro {
+  font-size: 10px;
+}
+.body-note-topline .icon-button {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-right: -10px;
+}
+.body-note-tile h2 {
+  font: 400 29px/1.1 var(--serif);
+  margin: 0 0 12px;
+}
+.body-note-tile p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.body-note-tile > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 16px;
+}
+.encounter-photo-status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 20px;
+  text-align: center;
+}
+@keyframes note-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@media (min-width: 1550px) {
+  .encounter .chapter-copy h1 {
+    font-size: 76px;
+  }
+  .chapter-1 .encounter h1 {
+    font-size: 60px;
+  }
+  .chapter-2 .encounter h1 {
+    font-size: 68px;
+  }
+}
+@media (min-width: 1020px) and (max-height: 849px) {
+  .animal-chapter .encounter .chapter-copy h1 {
+    font-size: 54px;
+  }
+  .chapter-1 .encounter .chapter-copy h1,
+  .chapter-2 .encounter .chapter-copy h1 {
+    font-size: 52px;
+  }
+  .encounter-note-slot {
+    min-height: 210px;
+    margin: 8px 0;
+  }
+  .body-note-tile {
+    padding: 4px 14px 12px;
+  }
+  .body-note-tile h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+  }
+  .body-note-tile p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .body-note-tile > a {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 1190px) and (min-width: 1020px) {
+  .encounter.chapter-body {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 22px;
+  }
+  .encounter .chapter-copy h1 {
+    font-size: 62px;
+  }
+  .chapter-1 .encounter h1,
+  .chapter-2 .encounter h1 {
+    font-size: 54px;
+  }
+}
+@media (max-width: 1019px) {
+  .encounter.chapter-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+  .encounter .chapter-copy {
+    display: contents;
+  }
+  .encounter-title {
+    grid-row: 1;
+  }
+  .encounter .chapter-visual {
+    grid-row: 2;
+    height: auto;
+  }
+  .encounter-note-slot {
+    grid-row: 3;
+    min-height: 220px;
+    margin: 0;
+    align-items: start;
+  }
+  .encounter-actions {
+    grid-row: 4;
+  }
+  .encounter .chapter-copy h1 {
+    font-size: 58px;
+  }
+  .chapter-1 .encounter h1,
+  .chapter-2 .encounter h1 {
+    font-size: 50px;
+  }
+  .encounter .eyebrow {
+    margin-bottom: 12px;
+  }
+  .encounter .scientific-name {
+    margin-top: 12px;
+  }
+}
+@media (max-width: 759px) {
+  .encounter .chapter-copy h1 {
+    font-size: 52px;
+  }
+  .chapter-1 .encounter h1,
+  .chapter-2 .encounter h1 {
+    font-size: 45px;
+  }
+  .encounter .scientific-name {
+    font-size: 22px;
+  }
+  .encounter.chapter-body {
+    padding-top: 22px;
+  }
+  .encounter-note-slot {
+    min-height: 230px;
+  }
+  .body-note-tile {
+    width: 100%;
+  }
+  .encounter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+  }
+  .encounter-actions .primary-button,
+  .encounter-actions .underlined-button {
+    margin: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .body-note-tile {
+    animation: none;
+  }
+}
