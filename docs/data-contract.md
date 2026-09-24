@@ -1,31 +1,25 @@
-# Animal data contract (draft for team agreement)
+# Animalia data contract
 
-Agree on this format before building the directory, detail pages, and content in parallel. For the first version, use static JSON with one file per animal: `data/animals/<id>.json`. This proposal is independent of the frontend framework.
+`src/types.ts` is the authoritative TypeScript contract. Shared components consume `src/data/animals.ts`; the media owner edits `src/data/media.ts`.
 
-| Field | Type | Meaning |
-| --- | --- | --- |
-| id | string | Stable English slug used by detail routes |
-| nameEn | string | English common name |
-| scientificName | string | Scientific name |
-| category | string | Category filter value agreed by the team |
-| summary | string | Short introduction |
-| habitat | string | Habitat description |
-| diet | string | Diet description |
-| sources | Source[] | Supporting references; at least one for real content |
-| image | Image or null | Image with licensing records; use a placeholder when null |
+| Field                                       | Purpose                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `Animal.id`                                 | Stable chapter ID and asset folder: `kangaroo`, `spinifex-mouse`, `australian-sea-lion` |
+| `commonName`, `shortName`, `scientificName` | Display title, rail label, and verified species name                                    |
+| `chapter`, `introduction`, `description`    | Short editorial label, introduction and sourced overview                                |
+| `habitatLabel`, `region`                    | Habitat and featured South Australian context                                           |
+| `media`                                     | Discovery, thumbnail, anatomy, poster and clips                                         |
+| `sources`                                   | Fact references with IDs, URLs, publishers and access dates                             |
+| `hotspots`                                  | Approved image-relative coordinates, descriptions and source IDs                        |
 
-`Source`: `id`, `title`, `url`, `accessedAt` (YYYY-MM-DD), and `supports` (an array of field names supported by this source).
+All still slots accept `Still | null`. Null means pending. A still has `src`, `alt`, `kind: 'cutout' | 'photo' | 'illustration'`, and `credit`. Do not use another species as a placeholder. Rendered model posters use `illustration`, never `photo`.
 
-`Image`: `url`, `alt`, `sourceUrl`, `creator`, `license`, `licenseUrl`, and `attribution`.
+`src/data/models.ts` is the separate 3D contract: each `AnimalModel` has `src` (self-contained GLB), `poster` (a credited Still), and `angle` (initial camera azimuth). It is keyed by the existing `Animal.id`; release folder names are mapped here rather than changing species IDs. The still/video manifest remains independent and the model poster is never used as documentary footage or an anatomy photograph.
 
-Rules:
+`Clip` has an ID, label, source path, MIME type, factual caption, credit, optional WebVTT captions and optional start/end seconds. An empty `clips` array means no footage is available. Add only actual, permitted clips. A separate clip may demonstrate a specific behaviour only if the label is supported by the footage.
 
-- Each `id` is unique and uses lowercase English letters, numbers, and hyphens. Agree on detail URLs during frontend setup.
-- Directory and detail pages read the same data. Do not maintain separate copies of names or summaries.
-- Confirm the allowed `category` values before collecting content.
-- Missing images must not prevent a page from rendering.
-- Omit uncertain facts rather than inventing values to fill fields.
-- When adding conservation status, weight, lifespan, or other fields, also define relevant units, sources, and time context.
-- Use English for content, image descriptions, and interface copy. Additional languages are outside the initial MVP.
+`Credit` records creator, original source URL, licence or stated permission, and an optional licence URL. A public URL alone does not establish rehosting permission.
 
-This is a working draft. No loader or validator has been implemented yet.
+`Hotspot.x` and `y` are percentages (0-100) from the top-left of the complete anatomy image. The image has natural height and its wrapper shares its bounds, so there is no separate letterbox coordinate space. Keep one hotspot note open at a time. A source ID must resolve within that animal's sources.
+
+The prototype does not expose a backend, routes for unsupported countries, or a duplicate animal directory. Chapter links are local anchors; the content contract can grow without duplicating view components.

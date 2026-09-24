@@ -1,0 +1,91 @@
+{
+  "mouse": {
+    "src": "/assets/spinifex-mouse/field.jpg",
+    "file": "images/01_spinifex_hopping_mouse.jpg",
+    "commons_title": "Spinifex hopping mouse 001.jpg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Spinifex_hopping_mouse_001.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Spinifex_hopping_mouse_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Spinifex_hopping_mouse_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "creator": "Sardaka",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Spinifex hopping mouse, Taronga Zoo, Sydney",
+    "bytes": 7607595,
+    "sha256": "cd87c813097c065b75ba264a1976f86fe41e27bf10fd4cf5425cd7a82b0d6262"
+  },
+  "mouse-natural": {
+    "src": "/assets/spinifex-mouse/portrait.jpg",
+    "file": "images/04_spinifex_hopping_mouse.jpg",
+    "commons_title": "Notomys alexis.jpg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Notomys_alexis.jpg",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Notomys_alexis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Notomys_alexis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "creator": "Dcoetzee",
+    "license": "Public domain",
+    "license_url": "",
+    "description": "A Spinifex hopping mouse (Notomys alexis) at Sydney Wildlife World, a zoo in Sydney.",
+    "bytes": 53404,
+    "sha256": "ec6f297c0c231f3359e1f0da31bad859c6562111dd4b54ac05168cccb063b00d"
+  },
+  "sea-lion": {
+    "src": "/assets/australian-sea-lion/field.jpg",
+    "file": "images/08_australian_sea_lion.jpg",
+    "commons_title": "Australian sea lion 01.JPG",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Australian_sea_lion_01.JPG",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Australian_sea_lion_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Australian_sea_lion_01.JPG/1920px-Australian_sea_lion_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "creator": "Peterdownunder",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "description": "An Australian sea lion sleeping on the beach at the Seal Bay Conservation Park on Kangaroo Island, South Australia",
+    "bytes": 801206,
+    "sha256": "81b1a2fc0142706e25d042b42d9d46b7e480df679ca1dcf0a11111c3288dc9ac"
+  },
+  "sea-lion-habitat": {
+    "src": "/assets/australian-sea-lion/habitat.jpg",
+    "file": "images/05_australian_sea_lion.jpg",
+    "commons_title": "Sea Lion Mother & Cub - Pearson Island, Investigator Group Conservation Park, South Australia.JPG",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Sea_Lion_Mother_%26_Cub_-_Pearson_Island,_Investigator_Group_Conservation_Park,_South_Australia.JPG",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Sea_Lion_Mother_%26_Cub_-_Pearson_Island%2C_Investigator_Group_Conservation_Park%2C_South_Australia.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Sea_Lion_Mother_%26_Cub_-_Pearson_Island%2C_Investigator_Group_Conservation_Park%2C_South_Australia.JPG/1920px-Sea_Lion_Mother_%26_Cub_-_Pearson_Island%2C_Investigator_Group_Conservation_Park%2C_South_Australia.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "creator": "Su.fraser",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "description": "Sea Lion mother & cub.  Inquisitive and friendly.",
+    "bytes": 646625,
+    "sha256": "b640adad96a0956d784d5beb8ce0b4ca1bf1564b9521ac9d9d25c57fb6bcf29b"
+  },
+  "sea-lion-film": {
+    "src": "/assets/australian-sea-lion/habitat.webm",
+    "file": "videos/02_australian_sea_lion.webm",
+    "commons_title": "Swimming with sea lions and dolphins.webm",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Swimming_with_sea_lions_and_dolphins.webm",
+    "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Swimming_with_sea_lions_and_dolphins.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/98/Swimming_with_sea_lions_and_dolphins.webm/Swimming_with_sea_lions_and_dolphins.webm.1080p.vp9.webm",
+    "creator": "Matthieu VAUTRIN",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0",
+    "description": "Swimming with Australian sea lions (Neophoca cinerea) and Indo-Pacific bottlenose dolphins (Tursiops aduncus) in Baird Bay, South Australia.\nIn this video, the audio has been removed from the original material and sections of it have been removed. Upgraded to the Commons 1080p transcode; no additional edits.",
+    "bytes": 69022422,
+    "sha256": "1e8e2dd84608ddd54f045d2cff1783639c08b8523539dcd6f2dfb1db8d2f7f24",
+    "release_sha256": "df419c1ed4425c8e4a43f2b76171fe8af667d8785d04b1d628571c7a0bd7f301"
+  },
+  "kangaroo-film": {
+    "src": "/assets/kangaroo/observation.webm",
+    "creator": "Fastily",
+    "source_page": "https://commons.wikimedia.org/wiki/File:San_Diego_Zoo_2_2016-06-11.webm",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cb/San_Diego_Zoo_2_2016-06-11.webm/San_Diego_Zoo_2_2016-06-11.webm.1080p.vp9.webm",
+    "description": "Red kangaroo at San Diego Zoo, 2016. Captive observation, not South Australian wild habitat."
+  },
+  "kangaroo-photo": {
+    "src": "/assets/kangaroo/field.jpg",
+    "creator": "Ltshears",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Red_Kangaroo_001.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Red_Kangaroo_001.jpg/1920px-Red_Kangaroo_001.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "description": "Red kangaroo at Binder Park Zoo, Michigan."
+  }
+}

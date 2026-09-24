@@ -1,0 +1,110 @@
+[
+  {
+    "code": "au",
+    "place": "Uluru, Northern Territory",
+    "src": "/assets/countries/au.jpg",
+    "creator": "Dietmar Rabich",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Petermann_Ranges_(AU),_Uluru-Kata_Tjuta_National_Park,_Uluru_--_2019_--_3688.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "nz",
+    "place": "Milford Sound",
+    "src": "/assets/countries/nz.jpg",
+    "creator": "Krzysztof Golik",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Milford_Sound_in_Fiordland_National_Park_04.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "jp",
+    "place": "Mount Fuji and Lake Kawaguchiko",
+    "src": "/assets/countries/jp.jpg",
+    "creator": "Midori",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Kawaguchiko_Sakura_Mount_Fuji_4.JPG",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  {
+    "code": "in",
+    "place": "Taj Mahal, Agra",
+    "src": "/assets/countries/in.jpg",
+    "creator": "Diego Delso",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:El_Taj_Mahal-Agra_India0028.JPG",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "ke",
+    "place": "Maasai Mara",
+    "src": "/assets/countries/ke.jpg",
+    "creator": "Byrdyak",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masai_Mara_landscape.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "za",
+    "place": "Table Mountain, Cape Town",
+    "src": "/assets/countries/za.jpg",
+    "creator": "Dietmar Rabich",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Table_Mountain_--_2024_--_2825.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "br",
+    "place": "Iguazu Falls",
+    "src": "/assets/countries/br.jpg",
+    "creator": "Acediscovery",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Iguazu-Falls-January-2013.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  {
+    "code": "ca",
+    "place": "Moraine Lake, Banff National Park",
+    "src": "/assets/countries/ca.jpg",
+    "creator": "Tobias Alt (Tobi87)",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moraine_Lake-Banff_NP.JPG",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "is",
+    "place": "Kirkjufell",
+    "src": "/assets/countries/is.jpg",
+    "creator": "Russo Francesco",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kirkjufell_Iceland_(107023745).jpeg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  {
+    "code": "no",
+    "place": "Sakrisoy, Lofoten",
+    "src": "/assets/countries/no.jpg",
+    "creator": "Svein Magne Tunli",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sakrisoy_Reine_Lofoten_tunliweb.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  {
+    "code": "ch",
+    "place": "Matterhorn and Riffelsee",
+    "src": "/assets/countries/ch.jpg",
+    "creator": "Dirk Beyer",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Matterhorn_Riffelsee_2005-06-11.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  {
+    "code": "cr",
+    "place": "Arenal Volcano",
+    "src": "/assets/countries/cr.jpg",
+    "creator": "Rhododendrites",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arenal_Volcano_(70602).jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+]

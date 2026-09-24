@@ -1,0 +1,90 @@
+.model-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.model-canvas {
+  position: absolute;
+  inset: 0 0 46px;
+}
+.model-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: pan-y !important;
+}
+.model-canvas canvas:active {
+  cursor: grabbing;
+}
+.model-poster {
+  position: absolute;
+  inset: 0 0 46px;
+  width: 100%;
+  height: calc(100% - 46px);
+  object-fit: contain;
+  background: var(--paper);
+}
+.model-status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 8px 10px;
+  background: var(--paper);
+  font-size: 11px;
+}
+.model-toolbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid var(--line);
+}
+.model-toolbar > span {
+  margin-right: auto;
+  font-size: 10px;
+  color: var(--muted);
+}
+.model-toolbar .icon-button {
+  width: 44px;
+  min-width: 0;
+}
+.model-error {
+  position: absolute;
+  bottom: 52px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  background: var(--paper);
+}
+.chapter-visual > .model-viewer {
+  flex: 1;
+  height: calc(100% - 44px);
+}
+.chapter-visual > button.visual-label {
+  background: transparent;
+  text-align: left;
+}
+@media (max-width: 759px) {
+  .model-toolbar .icon-button {
+    width: 44px;
+  }
+  .model-toolbar > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 360px) {
+  .model-toolbar > span {
+    display: none;
+  }
+}
