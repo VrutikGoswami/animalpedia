@@ -10,7 +10,7 @@ Both release ZIPs are downloaded under `.artifacts/`. The separate photo/video p
 
 ## Pending assets
 
-Current integration supersedes the original pending checklist below: three GLBs, real photographs and two sourced hotspots per species are live; kangaroo and sea-lion clips play at 1080p. See [field media](field-media.md) for exact provenance. The mouse still needs a reusable video, and the captive kangaroo clip should eventually be replaced by verified wild-habitat footage. Existing slots can be replaced through the manifest without changing components.
+Current integration supersedes the original pending checklist below: three GLBs, real photographs and three sourced hotspots per species are live; kangaroo and sea-lion clips play at 1080p. See [field media](field-media.md) for exact provenance. The mouse still needs a reusable video, and the captive kangaroo clip should eventually be replaced by verified wild-habitat footage. Existing slots can be replaced through the manifest without changing components.
 
 | Species / folder                            | Discovery                                   | Habitat                      | Anatomy                           |
 | ------------------------------------------- | ------------------------------------------- | ---------------------------- | --------------------------------- |
@@ -31,6 +31,8 @@ The table lists recommended replacement filenames; actual current paths are in `
 ## Manifest example
 
 Replace all example strings with verified values before enabling a slot:
+
+Import `assetUrl` from `../assetUrl` and wrap local media paths as `assetUrl('/assets/...')` in TypeScript manifests so they also work on the GitHub Pages project URL. Raw paths in JSON provenance stay unchanged.
 
 ```ts
 kangaroo: {

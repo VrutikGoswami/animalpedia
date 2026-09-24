@@ -14,6 +14,6 @@ The release's eastern-grey-kangaroo files are excluded because they do not match
 
 ## Field notes and checks
 
-Two external-feature hotspots per animal were placed after inspecting the actual photograph. Notes cite Perth Zoo, the Northern Territory Government or the Australian Museum. They are educational observations, not anatomical measurements. Changing a photograph requires rechecking every coordinate.
+Three external-feature hotspots per animal were placed after inspecting the actual photograph. Notes cite Perth Zoo, the Northern Territory Government, Animal Diversity Web, the Australian Museum and the Australian Government's marine species identification guide. They are educational observations, not anatomical measurements. Changing a photograph requires rechecking every coordinate.
 
 Playback starts paused and muted. Controls provide play/pause, sound, seeking, fullscreen where supported, and retry. Leaving Habitat unloads the video. Browser tests cover real local playback, seeking controls, mouse photographic fallback, hotspot note focus, video teardown, model rendering, navigation and responsive layout.

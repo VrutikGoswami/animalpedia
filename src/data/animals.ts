@@ -32,6 +32,15 @@ export const animals: Animal[] = [
     ],
     hotspots: [
       {
+        id: 'muzzle',
+        x: 12,
+        y: 71,
+        title: 'Marked muzzle',
+        description:
+          'Black-and-white muzzle markings help distinguish red kangaroos from grey kangaroos. This grazing animal holds its muzzle close to the grass.',
+        sourceId: 'kangaroo-zoo',
+      },
+      {
         id: 'coat',
         x: 53,
         y: 22,
@@ -90,6 +99,15 @@ export const animals: Animal[] = [
         sourceId: 'mouse-nt',
       },
       {
+        id: 'ears',
+        x: 33,
+        y: 25,
+        title: 'Upright ears',
+        description:
+          'The upright ears are clearly visible above the head in this photograph. In newborn spinifex hopping mice, the ears open at about 15 days old.',
+        sourceId: 'mouse-adw',
+      },
+      {
         id: 'coat',
         x: 69,
         y: 45,
@@ -120,6 +138,13 @@ export const animals: Animal[] = [
         url: 'https://australian.museum/learn/animals/mammals/australian-sea-lion/',
         accessedAt: '2026-09-24',
       },
+      {
+        id: 'sea-lion-identification',
+        title: 'Protected marine species identification guide',
+        publisher: 'Australian Government',
+        url: 'https://www.dcceew.gov.au/sites/default/files/documents/protected-marine-species-identification-guide.pdf',
+        accessedAt: '2026-09-24',
+      },
     ],
     hotspots: [
       {
@@ -139,6 +164,15 @@ export const animals: Animal[] = [
         description:
           'Australian sea lions have stocky bodies and short, narrow flippers. This resting animal was photographed at Seal Bay on Kangaroo Island.',
         sourceId: 'sea-lion-museum',
+      },
+      {
+        id: 'ear',
+        x: 36,
+        y: 44,
+        title: 'External ear',
+        description:
+          'Australian sea lions have small external ears. One ear flap is visible just behind the closed eye of this resting animal.',
+        sourceId: 'sea-lion-identification',
       },
     ],
   },

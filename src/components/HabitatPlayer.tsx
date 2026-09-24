@@ -29,6 +29,11 @@ function Player({
   const [retry, setRetry] = useState(0)
   const [duration, setDuration] = useState(0)
   const [position, setPosition] = useState(0)
+  const segmentStart = Math.max(0, Math.min(clip.start ?? 0, duration))
+  const segmentEnd = Math.max(
+    segmentStart,
+    Math.min(clip.end ?? duration, duration),
+  )
   const time = (seconds: number) =>
     `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`
   const clearLoading = () => {
@@ -64,9 +69,10 @@ function Player({
     }
     if (
       video.ended ||
-      (clip.end !== undefined && video.currentTime >= clip.end)
+      video.currentTime >= segmentEnd ||
+      video.currentTime < segmentStart
     )
-      video.currentTime = clip.start ?? 0
+      video.currentTime = segmentStart
     try {
       await video.play()
     } catch {
@@ -91,8 +97,12 @@ function Player({
                 ? event.currentTarget.duration
                 : 0,
             )
-            if (clip.start !== undefined)
-              event.currentTarget.currentTime = clip.start
+            const start = Math.max(
+              0,
+              Math.min(clip.start ?? 0, event.currentTarget.duration || 0),
+            )
+            event.currentTarget.currentTime = start
+            setPosition(start)
             ready()
           }}
           onCanPlay={ready}
@@ -106,10 +116,14 @@ function Player({
           onTimeUpdate={(event) => {
             setPosition(event.currentTarget.currentTime)
             if (
-              clip.end !== undefined &&
-              event.currentTarget.currentTime >= clip.end
-            )
+              segmentEnd > segmentStart &&
+              event.currentTarget.currentTime >= segmentEnd
+            ) {
               event.currentTarget.pause()
+              if (event.currentTarget.currentTime > segmentEnd)
+                event.currentTarget.currentTime = segmentEnd
+              setPosition(segmentEnd)
+            }
           }}
         >
           {clip.captions && (
@@ -177,18 +191,21 @@ function Player({
         <input
           type="range"
           aria-label="Video position"
-          min={0}
-          max={duration || 1}
+          min={segmentStart}
+          max={segmentEnd || 1}
           step={0.1}
-          value={position}
-          disabled={status !== 'ready'}
+          value={Math.max(segmentStart, Math.min(position, segmentEnd))}
+          disabled={status !== 'ready' || segmentEnd <= segmentStart}
           onChange={(event) => {
-            const value = Number(event.target.value)
+            const value = Math.max(
+              segmentStart,
+              Math.min(Number(event.target.value), segmentEnd),
+            )
             if (ref.current) ref.current.currentTime = value
             setPosition(value)
           }}
         />
-        <span>{time(duration)}</span>
+        <span>{time(segmentEnd)}</span>
         <button
           className="icon-button"
           aria-label="Fullscreen video"
@@ -206,8 +223,15 @@ function Player({
   )
 }
 
-export function HabitatPlayer({ animal }: { animal: Animal }) {
-  const [selected, setSelected] = useState(0)
+export function HabitatPlayer({
+  animal,
+  selected,
+  onSelect,
+}: {
+  animal: Animal
+  selected: number
+  onSelect: (index: number) => void
+}) {
   const [muted, setMuted] = useState(true)
   const clip = animal.media.clips[selected]
   if (!clip && animal.media.poster)
@@ -270,7 +294,7 @@ export function HabitatPlayer({ animal }: { animal: Animal }) {
             <button
               key={item.id}
               aria-pressed={selected === index}
-              onClick={() => setSelected(index)}
+              onClick={() => onSelect(index)}
             >
               {item.label}
             </button>

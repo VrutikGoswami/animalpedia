@@ -90,6 +90,8 @@ Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Luci
 
 ## Verification and limits
 
+See [brief completion and remaining media](docs/brief-status.md) for the reconciled request checklist. Each species has three sourced anatomy points. Returning from Anatomy preserves the selected habitat clip, paused and muted; configured segments constrain seeking and pause at their end.
+
 Browser acceptance tests cover the world entrance, loaded country photographs, full directory, search, Australia-only activation, browser history, reversible scrolling, all species, modal Escape/focus restoration, reduced motion, missing media, and injected broken-media retry at 1440px and 390px. Test screenshots and traces are written to ignored `test-results/`.
 
 Model checks include GLB structure and hash verification (`node scripts/verify-models.mjs`), desktop/mobile canvas-pixel coverage and framing, rotation/zoom/reset, optional rotation, fallback/retry and disposal on navigation. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.

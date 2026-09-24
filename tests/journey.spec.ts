@@ -56,7 +56,7 @@ test('species selection, habitat, anatomy and return journey', async ({
       await page.screenshot({ path: testInfo.outputPath('habitat.png') })
     await dialog.getByRole('button', { name: 'Anatomy', exact: true }).click()
     await expect(dialog.locator('.anatomy-image img')).toBeVisible()
-    await expect(dialog.locator('.hotspot')).toHaveCount(2)
+    await expect(dialog.locator('.hotspot')).toHaveCount(3)
     await dialog.locator('.hotspot').first().click()
     await expect(dialog.locator('.anatomy-note h3')).toBeVisible()
     await page.keyboard.press('Escape')

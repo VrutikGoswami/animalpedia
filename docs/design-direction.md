@@ -30,4 +30,4 @@ Media owner: correct species photography, habitat footage, posters, attribution/
 
 The released original animal models now render through a lazy-loaded Three.js viewer on the unframed discovery stage. Only the active animal has a canvas; closing the collection or opening a dialog disposes its renderer, geometry, materials and textures. Drag and icon controls handle inspection, while optional rotation starts paused and stops when reduced motion is enabled. Original posters provide loading/error fallbacks and species thumbnails. These are static illustrations, not scientific anatomical models. See model-integration.md for provenance and verification.
 
-No account system, AI service, backend or deployment is part of this implementation.
+No account system, AI service or backend is part of this implementation. The user subsequently requested public deployment; the preview is hosted on GitHub Pages through the authenticated account's fork.

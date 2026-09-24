@@ -21,6 +21,7 @@ export function AnimalDialog({
 }) {
   const [mode, setMode] = useState(initialMode)
   const [credits, setCredits] = useState(false)
+  const [selectedClip, setSelectedClip] = useState(0)
   const allCredits = [
     models[animal.id]?.poster.credit,
     animal.media.discovery?.credit,
@@ -92,8 +93,20 @@ export function AnimalDialog({
           </div>
         </div>
       )}
-      {mode === 'habitat' && <HabitatPlayer animal={animal} />}
+      {mode === 'habitat' && (
+        <HabitatPlayer
+          animal={animal}
+          selected={selectedClip}
+          onSelect={setSelectedClip}
+        />
+      )}
       {mode === 'anatomy' && <Anatomy animal={animal} />}
+      {mode === 'anatomy' && (
+        <button className="text-button" onClick={() => setMode('habitat')}>
+          <ArrowLeft size={16} aria-hidden="true" />
+          Return to habitat
+        </button>
+      )}
       <div className="dialog-footer">
         <span>{animal.region}</span>
         <button
