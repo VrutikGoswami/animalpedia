@@ -24,7 +24,11 @@ Pointer dragging rotates; toolbar buttons rotate, zoom, reset and toggle automat
 
 Loading retains the supplied poster; failed fetches, a 25-second timeout, WebGL initialization failure and context loss show fallback/retry. Navigation, inactive chapters and modal opening dispose the renderer, controls, observers, geometry, materials and embedded textures, and abort pending fetches. Posters also fill the species rail and overview while field photography is pending.
 
-## Checks
+## Body-part nodes
+
+`src/data/model-points.ts` records three educational body-region points for each model, with glTF Y-up coordinates, outward directions, descriptions and primary source links. Release topic anchors are reused where appropriate; these are illustrations, not validated anatomy. Points snap to the mesh and project into keyboard-accessible white-dot buttons each time the camera changes. Occluded points are hidden. The Body parts toolbar button exposes every note, including currently hidden points. Opening a note pauses rotation; Escape restores focus. The small native dialog keeps notes clear of the animal rather than covering body regions with text. Photo hotspots remain a separate experience.
+
+## Interaction checks
 
 `node scripts/verify-models.mjs` checks GLB magic/version/length, release SHA-256 values and absence of external dependencies. `tests/models.spec.ts` checks nonblank canvas pixels, uncropped default framing, changing rendered pixels after rotation, zoom/reset, optional rotation, one-canvas ownership, navigation cleanup and failed-download retry on desktop and mobile Chromium.
 

@@ -89,7 +89,7 @@ test('all released models render, orbit, zoom and unload', async ({
     expect(await page.locator('canvas').count()).toBe(1)
   }
   await page.locator('.wordmark').click()
-  await expect(page.locator('canvas')).toHaveCount(0)
+  await expect(page.locator('.model-canvas canvas')).toHaveCount(0)
   expect(errors).toEqual([])
 })
 

@@ -14,9 +14,9 @@
 
 All still slots accept `Still | null`. Null means pending. A still has `src`, `alt`, `kind: 'cutout' | 'photo' | 'illustration'`, and `credit`. Do not use another species as a placeholder. Rendered model posters use `illustration`, never `photo`.
 
-`src/data/models.ts` is the separate 3D contract: each `AnimalModel` has `src` (self-contained GLB), `poster` (a credited Still), and `angle` (initial camera azimuth). It is keyed by the existing `Animal.id`; release folder names are mapped here rather than changing species IDs. The still/video manifest remains independent and the model poster is never used as documentary footage or an anatomy photograph.
+`src/data/models.ts` is the separate 3D contract: each `AnimalModel` has `src` (self-contained GLB), `poster`, `angle` (initial camera azimuth) and `points`. Points are defined in `model-points.ts` with glTF Y-up position/normal tuples, body-part title, description, publisher and source URL. Photo hotspot coordinates are not interchangeable with model coordinates. Model posters are never documentary footage.
 
-`Clip` has an ID, label, source path, MIME type, factual caption, credit, optional WebVTT captions and optional start/end seconds. An empty `clips` array means no footage is available. Add only actual, permitted clips. A separate clip may demonstrate a specific behaviour only if the label is supported by the footage.
+`Clip` has an ID, label, source path, MIME type, factual caption, credit, optional WebVTT captions and optional start/end seconds. `AnimalMedia.embed` alternatively accepts a verified YouTube video ID, title, factual caption and credit. An empty `clips` array means no native footage, but an embed may still be available. Never put watch-page URLs in native clips. A separate clip may demonstrate a specific behaviour only if the label is supported by the footage.
 
 `Credit` records creator, original source URL, licence or stated permission, and an optional licence URL. A public URL alone does not establish rehosting permission.
 

@@ -23,6 +23,7 @@ export function AnimalDialog({
   const [credits, setCredits] = useState(false)
   const [selectedClip, setSelectedClip] = useState(0)
   const allCredits = [
+    animal.media.embed?.credit,
     models[animal.id]?.poster.credit,
     animal.media.discovery?.credit,
     animal.media.anatomy?.credit,

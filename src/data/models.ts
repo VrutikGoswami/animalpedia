@@ -1,10 +1,12 @@
 import type { Still } from '../types'
 import { assetUrl } from '../assetUrl'
+import { modelPoints, type ModelPoint } from './model-points'
 
 export interface AnimalModel {
   src: string
   poster: Still
   angle: number
+  points: ModelPoint[]
 }
 const release =
   'https://github.com/Kylektt/animalpedia/releases/tag/animal-cards-v0.1.0'
@@ -12,6 +14,14 @@ function model(folder: string, name: string, angle: number): AnimalModel {
   return {
     src: assetUrl(`/assets/models/${folder}/model.glb`),
     angle,
+    points:
+      modelPoints[
+        folder === 'red-kangaroo'
+          ? 'kangaroo'
+          : folder === 'spinifex-hopping-mouse'
+            ? 'spinifex-mouse'
+            : folder
+      ],
     poster: {
       src: assetUrl(`/assets/models/${folder}/poster.png`),
       alt: `${name}, original Animalpedia 3D illustration, not an anatomical scan`,

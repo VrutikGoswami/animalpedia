@@ -8,7 +8,7 @@ The supplied Animalia image defines the aesthetic: restrained white space, fine 
 
 ## Motion
 
-The first screen is now the world entrance: a central Animalia wordmark surrounded by twelve landscape photographs with flag labels. A finite, scroll-scrubbed GSAP timeline expands the photographic field outward at differing distances while the title gently recedes. The composition uses CSS transforms, not a 3D renderer. Mobile shows six photographs; every country remains in the searchable index. Reduced motion removes the animation and pinning. Country photographs are real, locally hosted, licensed images with in-app credits.
+The world entrance uses a Three.js perspective camera moving through three depth layers, each containing four country photographs. GSAP maps native scroll to camera travel, revealing deeper countries while foreground planes pass the viewer. Scroll back to reverse. Projected flag/name controls track the planes. Responsive framing preserves a clear corridor around the Animalia wordmark. Reduced motion and short viewports use the static photographic composition without pinning; WebGL failure also restores it. All countries remain in the directory.
 
 The [Beautiful Universe reference](https://www.beautifuluniverse.cc/) was inspected in a browser before implementation. Its scroll composition moves and scales imagery around a stable centre. Animalia adapts that spatial behaviour to three coherent chapters through a GSAP timeline: the outgoing image enlarges and moves away as the incoming image grows into place; text transitions accompany its own image. No third-party site code or media is used.
 

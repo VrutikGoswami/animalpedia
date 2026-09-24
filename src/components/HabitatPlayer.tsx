@@ -10,6 +10,7 @@ import {
   Maximize2,
 } from 'lucide-react'
 import type { Animal, Clip } from '../types'
+import { EmbeddedHabitat } from './EmbeddedHabitat'
 
 function Player({
   clip,
@@ -234,6 +235,7 @@ export function HabitatPlayer({
 }) {
   const [muted, setMuted] = useState(true)
   const clip = animal.media.clips[selected]
+  if (animal.media.embed) return <EmbeddedHabitat embed={animal.media.embed} />
   if (!clip && animal.media.poster)
     return (
       <figure className="habitat-photo-study">

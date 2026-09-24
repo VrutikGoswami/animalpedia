@@ -8,11 +8,14 @@ import {
   Play,
   Pause,
   RefreshCw,
+  ScanSearch,
+  ExternalLink,
 } from 'lucide-react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import type { AnimalModel } from '../data/models'
+import { Modal } from './Modal'
 import '../model.css'
 
 type ViewerActions = {
@@ -59,6 +62,8 @@ export default function ModelViewer({
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
   const [attempt, setAttempt] = useState(0)
   const [rotating, setRotating] = useState(false)
+  const [selected, setSelected] = useState<number | null>(null)
+  const markers = useRef<(HTMLButtonElement | null)[]>([])
 
   useEffect(() => {
     const container = host.current!
@@ -105,9 +110,36 @@ export default function ModelViewer({
     scene.add(fill)
     let baseDistance = 4
     let visible = true
+    const raycaster = new THREE.Raycaster()
+    let anchors: THREE.Vector3[] = []
+    const projectMarkers = () => {
+      if (!object) return
+      camera.updateMatrixWorld()
+      anchors.forEach((anchor, index) => {
+        const button = markers.current[index]
+        if (!button) return
+        const point = anchor.clone().project(camera)
+        const direction = anchor.clone().sub(camera.position)
+        const distance = direction.length()
+        raycaster.set(camera.position, direction.normalize())
+        const hit = raycaster.intersectObject(object!, true)[0]
+        const unobscured = !hit || hit.distance >= distance - 0.045
+        const show =
+          unobscured &&
+          Math.abs(point.x) < 0.96 &&
+          Math.abs(point.y) < 0.94 &&
+          point.z > -1 &&
+          point.z < 1
+        button.style.transform = `translate(${((point.x + 1) * container.clientWidth) / 2}px, ${((1 - point.y) * container.clientHeight) / 2}px) translate(-50%, -50%)`
+        button.style.visibility = show ? 'visible' : 'hidden'
+        button.tabIndex = show ? 0 : -1
+      })
+    }
     const render = () => {
-      if (!disposed && visible && !document.hidden)
+      if (!disposed && visible && !document.hidden) {
         renderer.render(scene, camera)
+        projectMarkers()
+      }
     }
     const fit = () => {
       const width = Math.max(1, container.clientWidth)
@@ -226,7 +258,53 @@ export default function ModelViewer({
         }
         object = gltf.scene
         scene.add(object)
+        object.updateMatrixWorld(true)
+        anchors = model.points.map((point) => {
+          const anchor = new THREE.Vector3(...point.position)
+          const normal = new THREE.Vector3(...point.normal).normalize()
+          raycaster.set(
+            anchor.clone().addScaledVector(normal, 0.7),
+            normal.clone().negate(),
+          )
+          const hits = raycaster.intersectObject(object!, true)
+          hits.sort(
+            (a, b) =>
+              a.point.distanceToSquared(anchor) -
+              b.point.distanceToSquared(anchor),
+          )
+          if (hits[0])
+            return hits[0].point.clone().addScaledVector(normal, 0.006)
+          // Thin ears can miss the normal ray; snap the marker to the nearest mesh vertex.
+          let nearest = anchor.clone(),
+            best = Infinity
+          const vertex = new THREE.Vector3()
+          object!.traverse((node) => {
+            if (!(node instanceof THREE.Mesh)) return
+            const positions = node.geometry.getAttribute('position')
+            for (let i = 0; i < positions.count; i++) {
+              vertex
+                .fromBufferAttribute(positions, i)
+                .applyMatrix4(node.matrixWorld)
+              const distance = vertex.distanceToSquared(anchor)
+              if (distance < best) {
+                best = distance
+                nearest = vertex.clone()
+              }
+            }
+          })
+          return nearest.addScaledVector(normal, 0.006)
+        })
         fit()
+        anchors = anchors.map((anchor, index) => {
+          if (model.points[index].id !== 'ears') return anchor
+          const direction = anchor.clone().sub(camera.position).normalize()
+          raycaster.set(camera.position, direction)
+          const hit = raycaster.intersectObject(object!, true)[0]
+          return hit
+            ? hit.point.clone().addScaledVector(direction, -0.006)
+            : anchor
+        })
+        render()
         setStatus('ready')
       })
       .catch(() => {
@@ -253,9 +331,67 @@ export default function ModelViewer({
   }, [model, name, attempt])
 
   const ready = status === 'ready'
+  const inspect = (index: number) => {
+    actions.current?.rotate(false)
+    setRotating(false)
+    setSelected(index)
+  }
   return (
     <div className="model-viewer" data-model-state={status}>
       <div className="model-canvas" ref={host} />
+      <div className="model-markers" hidden={!ready}>
+        {model.points.map((point, index) => (
+          <button
+            key={point.id}
+            ref={(node) => {
+              markers.current[index] = node
+            }}
+            className="model-node"
+            aria-label={`Explore ${point.title}`}
+            title={point.title}
+            onClick={() => inspect(index)}
+          >
+            <span />
+          </button>
+        ))}
+      </div>
+      {selected !== null && (
+        <Modal
+          label={`${name}: body parts`}
+          className="model-note-dialog"
+          onClose={() => setSelected(null)}
+        >
+          <p className="eyebrow">{name}</p>
+          <h2>{model.points[selected].title}</h2>
+          <label className="model-part-select">
+            Body part
+            <select
+              aria-label="Body part"
+              value={selected}
+              onChange={(event) => setSelected(Number(event.target.value))}
+            >
+              {model.points.map((point, index) => (
+                <option key={point.id} value={index}>
+                  {point.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <p className="model-part-description">
+            {model.points[selected].description}
+          </p>
+          <a
+            href={model.points[selected].source}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {model.points[selected].publisher} <ExternalLink size={14} />
+          </a>
+          <p className="model-part-disclaimer">
+            Illustrated body region, not an anatomical measurement.
+          </p>
+        </Modal>
+      )}
       {!ready && (
         <img
           className="model-poster"
@@ -290,7 +426,15 @@ export default function ModelViewer({
         role="group"
         aria-label={`${name} model controls`}
       >
-        <span>3D illustration</span>
+        <button
+          disabled={!ready}
+          className="icon-button model-parts-button"
+          title="Body parts"
+          aria-label="Body parts"
+          onClick={() => inspect(0)}
+        >
+          <ScanSearch size={18} />
+        </button>
         <button
           disabled={!ready}
           className="icon-button"

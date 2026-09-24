@@ -1,6 +1,6 @@
 # Country entrance assets
 
-The world scene features Australia, New Zealand, Japan, India, Kenya, South Africa, Brazil, Canada, Iceland, Norway, Switzerland and Costa Rica. Mobile presents six of these photographs to protect the central title and touch targets. The complete index is separate from this curated scene.
+The world scene features Australia, New Zealand, Japan, India, Kenya, South Africa, Brazil, Canada, Iceland, Norway, Switzerland and Costa Rica across three depth layers. Desktop and mobile scroll through all twelve. The static fallback uses a quieter six-photo mobile composition. The complete index is separate from this curated scene.
 
 ## Photographs
 

@@ -30,7 +30,7 @@ Browser tests use Microsoft Edge by default. On a machine without Edge, run `npx
 
 ## Experience
 
-- `/` or `/#world`: a white, full-screen country entrance inspired by the supplied Beautiful Universe reference. Twelve licensed landscape photographs expand around the central Animalia title with native, reversible scroll motion. Mobile uses a quieter six-photo composition. Reduced motion and short viewports disable pinning.
+- `/` or `/#world`: a white, full-screen Three.js country entrance. The camera travels through three depth layers of four licensed country photographs, revealing the next countries as the front layer passes out of view. Reverse scroll travels back out. Mobile keeps the title clear; reduced motion, short viewports and WebGL failures retain a static photographic layout.
 - The searchable country index includes all 250 country/territory entries in Flagpedia's two-letter directory, including Kosovo. Every entry has a locally hosted flag. Only Australia is enabled; the rest say "Coming soon". The photographed selection is not the complete directory.
 - `/#australia`: the existing South Australia animal experience. The wordmark returns to the world entrance; browser Back and Forward work between these views.
 - Desktop: pinned species gallery with scroll-driven scale, depth-like motion, and coordinated text transitions, inspired by [Beautiful Universe](https://www.beautifuluniverse.cc/). Original implementation; no source code or media copied.
@@ -41,7 +41,7 @@ Browser tests use Microsoft Edge by default. On a machine without Edge, run `npx
 
 ## Media handoff
 
-**All three released 3D illustrations, species photographs and sourced field-note hotspots are integrated.** Red-kangaroo and sea-lion videos play locally at 1080p with seeking and fullscreen. The hopping-mouse Habitat view is a credited photographic study: a reusable video is still pending. No substitute species or generated behaviour are displayed.
+**All three released 3D illustrations, species photographs and sourced field-note hotspots are integrated.** Red-kangaroo and sea-lion videos play locally at 1080p. The mouse now has an official Zoos Victoria YouTube embed, retaining its own player and branding; no streaming footage is downloaded. White dots on each model open body-part facts with sources and follow the surface as it rotates. No substitute species or generated behaviour are displayed.
 
 Country photography and all flags are already included locally under `public/assets/countries/` and `public/assets/flags/`. Per-photo creators, source pages and licences are in `src/data/country-photos.json` and the in-app country index's credits. See [country assets](docs/country-assets.md).
 
@@ -86,7 +86,7 @@ tests/world.spec.ts           # Country entrance and navigation checks
 tests/models.spec.ts          # Canvas pixels, controls, disposal and retry
 ```
 
-Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Lucide icons. No backend, database or runtime AI. npm's lockfile pins installed versions. The 3D runtime is lazy-loaded only inside Australia; the build currently reports a size warning for that separate Three.js chunk. Each original GLB is approximately 11-13 MB, so compression/LOD is a future production optimization.
+Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Lucide icons. No backend, database or runtime AI. npm's lockfile pins installed versions. Three.js is shared by the lazy country scene and animal viewer; its chunk still produces a size warning. Each original GLB is approximately 11-13 MB, so compression/LOD is a future production optimization.
 
 ## Verification and limits
 
@@ -96,6 +96,6 @@ Browser acceptance tests cover the world entrance, loaded country photographs, f
 
 Model checks include GLB structure and hash verification (`node scripts/verify-models.mjs`), desktop/mobile canvas-pixel coverage and framing, rotation/zoom/reset, optional rotation, fallback/retry and disposal on navigation. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.
 
-The kangaroo is a red kangaroo; do not substitute the archive's eastern-grey media. Field-note points identify visible external features in the actual photographs, not scientific anatomical segmentation. Wild red-kangaroo habitat footage and a reusable hopping-mouse film remain desirable replacements. Google Fonts is optional; local serif and sans-serif fallbacks keep the interface usable offline. The HD sea-lion film is about 69 MB; production should add adaptive delivery.
+The kangaroo is a red kangaroo; do not substitute the archive's eastern-grey media. Photo and model points are educational body-region notes, not scientific anatomical segmentation. Wild red-kangaroo footage remains desirable. Mouse playback requires YouTube access; a direct Watch on YouTube link and reload control remain available. Google Fonts is optional; local serif and sans-serif fallbacks keep the interface usable offline. The HD sea-lion film is about 69 MB; production should add adaptive delivery.
 
 See [design direction](docs/design-direction.md), [data contract](docs/data-contract.md), and [contribution guide](CONTRIBUTING.md). Existing GitHub issues describing the old 10-animal directory are superseded by this brief; they have not been edited remotely.

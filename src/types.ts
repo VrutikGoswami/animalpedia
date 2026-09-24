@@ -29,6 +29,12 @@ export interface Clip {
   end?: number
 }
 export interface AnimalMedia {
+  embed?: {
+    videoId: string
+    title: string
+    caption: string
+    credit: Credit
+  }
   discovery: Still | null
   thumbnail: Still | null
   anatomy: Still | null

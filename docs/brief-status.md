@@ -14,7 +14,7 @@ The later requests supersede the original panda/lion/mantis list, no-3D constrai
 
 ## Media still needed
 
-- Reusable, correctly identified spinifex hopping mouse video. A fresh Commons and web search did not establish a directly hostable licensed clip; the photographic study remains explicitly labelled.
+- Mouse footage is now included through the official Zoos Victoria YouTube player. A directly hostable licensed file remains optional, not a blocker to watching the mouse.
 - Wild red-kangaroo habitat footage. The current 1080p film is explicitly a captive San Diego Zoo observation.
 - Additional verified behaviour clips or reviewed timestamps. The selector supports multiple clips, but no unsupported behaviours or arbitrary documentary segments are published.
 
@@ -23,6 +23,8 @@ All countries are selectable in the directory only as availability permits. Coun
 The original dark halo was superseded by the later white photographic reference and unframed model stage. No decorative halo or unrequested original species has been added back.
 
 ## Hosting
+
+The latest revision adds real Three.js camera-depth country travel and surface-anchored white model nodes with sourced body-part facts. See `model-points.ts` and the model integration handoff.
 
 Public preview: https://vrutikgoswami.github.io/animalpedia/
 

@@ -28,10 +28,13 @@ test('species selection, habitat, anatomy and return journey', async ({
       dialog.getByRole('heading', { name, exact: true }),
     ).toBeVisible()
     if (index === 1) {
-      await expect(dialog.getByText('Photographic observation')).toBeVisible()
+      await expect(dialog.locator('iframe')).toHaveAttribute(
+        'src',
+        /youtube-nocookie\.com\/embed\/88f9w3pzaVs/,
+      )
       await expect(
-        dialog.getByText(/Verified habitat footage is still pending/),
-      ).toBeVisible()
+        dialog.getByRole('link', { name: /Watch on YouTube/ }),
+      ).toHaveAttribute('href', 'https://www.youtube.com/watch?v=88f9w3pzaVs')
     } else {
       await expect(
         dialog.getByRole('button', { name: 'Play video', exact: true }),
@@ -62,6 +65,7 @@ test('species selection, habitat, anatomy and return journey', async ({
     await page.keyboard.press('Escape')
     await expect(dialog.locator('.hotspot').first()).toBeFocused()
     await expect(dialog.locator('video')).toHaveCount(0)
+    await expect(dialog.locator('iframe')).toHaveCount(0)
     if (index === 0)
       await page.screenshot({ path: testInfo.outputPath('anatomy.png') })
     await dialog.getByRole('button', { name: 'Sources & credits' }).click()

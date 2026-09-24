@@ -47,36 +47,48 @@ export function CountryLanding({
         },
         (context) => {
           if (!context.conditions?.motion) return
-          const mobile = context.conditions.mobile
+          let disposed = false
+          let depth:
+            { update: (value: number) => void; dispose: () => void } | undefined
+          const travel = { progress: 0 }
+          void import('./countryDepth').then(({ createCountryDepth }) => {
+            if (disposed) return
+            try {
+              depth = createCountryDepth(
+                root.current!.querySelector('.country-field')!,
+                Array.from(root.current!.querySelectorAll('.country-float')),
+              )
+              depth.update(travel.progress)
+            } catch {
+              /* The photographic layout remains usable without WebGL. */
+            }
+          })
           const timeline = gsap.timeline({
             defaults: { ease: 'none' },
             scrollTrigger: {
               trigger: '.country-scene',
               start: () => `top ${window.innerWidth < 760 ? 72 : 80}px`,
-              end: () => `+=${window.innerHeight * 1.6}`,
+              end: () => `+=${window.innerHeight * 3.8}`,
               pin: true,
               scrub: 0.8,
               invalidateOnRefresh: true,
             },
           })
-          gsap.utils
-            .toArray<HTMLElement>('.country-float', root.current)
-            .forEach((card, index) => {
-              const [x, y, , rotation] = positions[index]
-              timeline.to(
-                card,
-                {
-                  x: () => (x - 50) * (window.innerWidth / 190),
-                  y: () => (y - 48) * (window.innerHeight / 230),
-                  scale: mobile ? 1.12 : 1.38,
-                  rotation: rotation * -0.5,
-                  duration: 1,
-                },
-                0,
-              )
-            })
+          timeline.to(
+            travel,
+            {
+              progress: 1,
+              duration: 1,
+              onUpdate: () => depth?.update(travel.progress),
+            },
+            0,
+          )
           timeline.to('.world-title', { scale: 0.86, duration: 1 }, 0)
           timeline.to('.world-progress i', { scaleX: 1, duration: 1 }, 0)
+          return () => {
+            disposed = true
+            depth?.dispose()
+          }
         },
       )
       return () => mm.revert()

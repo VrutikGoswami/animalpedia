@@ -10,7 +10,7 @@ Both release ZIPs are downloaded under `.artifacts/`. The separate photo/video p
 
 ## Pending assets
 
-Current integration supersedes the original pending checklist below: three GLBs, real photographs and three sourced hotspots per species are live; kangaroo and sea-lion clips play at 1080p. See [field media](field-media.md) for exact provenance. The mouse still needs a reusable video, and the captive kangaroo clip should eventually be replaced by verified wild-habitat footage. Existing slots can be replaced through the manifest without changing components.
+Three GLBs, real photographs and three sourced photo hotspots per species are live; all models also have white body-part nodes. Kangaroo and sea-lion clips play at 1080p, while mouse Habitat uses an official Zoos Victoria YouTube embed. See [field media](field-media.md). Verified wild-kangaroo footage remains a desirable replacement. Native media slots can be replaced through the manifest without changing components.
 
 | Species / folder                            | Discovery                                   | Habitat                      | Anatomy                           |
 | ------------------------------------------- | ------------------------------------------- | ---------------------------- | --------------------------------- |
@@ -80,4 +80,4 @@ Do not estimate coordinates before the image exists. With no still, Anatomy show
 
 Confirm species identity and licence; view every image at 1440px and 390px; inspect cutout edges and aspect ratio; play each clip; switch clips and views to confirm audio stops; check supplied captions; inspect every hotspot against its body region; test Escape and close controls; run `npm run build`, `npm run lint`, and `npm test`.
 
-Use permitted native media only. National Geographic or other streaming footage needs appropriate rights or a separately implemented official embed. This version has no YouTube embed adapter; never put a watch-page URL in a native video's `src`.
+Use permitted native media or official embeds. `AnimalMedia.embed` supplies `videoId`, `title`, `caption` and `credit` for the YouTube adapter. The player is unmodified, starts without autoplay, requests muted playback and is removed on leaving Habitat. Never put a watch-page URL in a native video's `src` or download streaming footage without permission.

@@ -12,7 +12,12 @@ function credit(id: keyof typeof sources): Credit {
   }
 }
 function still(id: keyof typeof sources, alt: string): Still {
-  return { src: assetUrl(sources[id].src), alt, kind: 'photo', credit: credit(id) }
+  return {
+    src: assetUrl(sources[id].src),
+    alt,
+    kind: 'photo',
+    credit: credit(id),
+  }
 }
 const kangaroo = still(
   'kangaroo-photo',
@@ -51,6 +56,18 @@ export const media: Record<string, AnimalMedia> = {
     ],
   },
   'spinifex-mouse': {
+    embed: {
+      videoId: '88f9w3pzaVs',
+      title: 'The Spinifex Hopping-mouse',
+      caption:
+        'An official Zoos Victoria observation of spinifex hopping mice at Healesville Sanctuary, Victoria. Captive footage, not wild South Australian habitat. Playback is provided by YouTube.',
+      credit: {
+        creator: 'Zoos Victoria',
+        sourceUrl: 'https://www.youtube.com/watch?v=88f9w3pzaVs',
+        license:
+          'Official YouTube embed only; no download or rehosting rights claimed',
+      },
+    },
     discovery: mouse,
     thumbnail: still(
       'mouse-natural',
@@ -59,7 +76,7 @@ export const media: Record<string, AnimalMedia> = {
     anatomy: mouse,
     poster: mouse,
     habitatNote:
-      'Taronga Zoo, Sydney. Red lighting in the nocturnal house; this is a captive observation, not a photograph of wild South Australia. Verified habitat footage is still pending.',
+      'Taronga Zoo, Sydney. Red lighting in the nocturnal house; this is a captive photographic observation.',
     clips: [],
   },
   'australian-sea-lion': {
