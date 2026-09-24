@@ -121,7 +121,7 @@ export function createCountryDepth(host: HTMLElement, cards: HTMLElement[]) {
     const mobile = w < 760
     items.forEach(({ plane, ratio }, index) => {
       const slot = index % 4
-      const width = viewWidth * (mobile ? 0.43 : 0.27)
+      const width = viewWidth * (mobile ? (ratio < 1 ? 0.24 : 0.36) : 0.27)
       plane.scale.set(width, width / ratio, 1)
       plane.position.x = viewWidth * (slot % 2 ? 0.34 : -0.34)
       plane.position.y = viewHeight * (slot < 2 ? 0.32 : -0.35)
