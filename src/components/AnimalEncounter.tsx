@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import {
   ArrowRight,
@@ -23,14 +23,70 @@ export function AnimalEncounter({
   const [attempt, setAttempt] = useState(0)
   const buttons = useRef<Record<string, HTMLButtonElement | null>>({})
   const note = useRef<HTMLElement>(null)
+  const photoFrame = useRef<HTMLDivElement>(null)
   const photo = animal.media.discovery
   const point = animal.hotspots.find((item) => item.id === selected)
   const source = animal.sources.find((item) => item.id === point?.sourceId)
   const panelId = `${animal.id}-body-note`
+  useLayoutEffect(() => {
+    const frame = photoFrame.current
+    const tile = note.current
+    if (!point || !frame || !tile) return
+    const place = () => {
+      const width = frame.clientWidth
+      const height = frame.clientHeight
+      const w = tile.offsetWidth
+      const h = tile.offsetHeight
+      const x = (width * point.x) / 100
+      const y = (height * point.y) / 100
+      const inset = 10
+      const candidates = [
+        [x + 28, y - h / 2],
+        [x - w - 28, y - h / 2],
+        [x - w / 2, y - h - 28],
+        [x - w / 2, y + 28],
+        [inset, inset],
+        [width - w - inset, inset],
+        [inset, height - h - inset],
+        [width - w - inset, height - h - inset],
+      ].map(([left, top]) => ({
+        left: Math.max(inset, Math.min(left, width - w - inset)),
+        top: Math.max(inset, Math.min(top, height - h - inset)),
+      }))
+      // Prefer nearby placements that leave the selected dot and other nodes clear.
+      const score = ({ left, top }: { left: number; top: number }) => {
+        const covered = animal.hotspots.reduce((sum, item) => {
+          const px = (width * item.x) / 100
+          const py = (height * item.y) / 100
+          return (
+            sum +
+            (px + 22 > left &&
+            px - 22 < left + w &&
+            py + 22 > top &&
+            py - 22 < top + h
+              ? item.id === point.id
+                ? 1000000
+                : 100000
+              : 0)
+          )
+        }, 0)
+        return covered + Math.hypot(left + w / 2 - x, top + h / 2 - y)
+      }
+      const best = candidates.sort((a, b) => score(a) - score(b))[0]
+      tile.style.left = `${best.left}px`
+      tile.style.top = `${best.top}px`
+    }
+    place()
+    const observer = new ResizeObserver(place)
+    observer.observe(frame)
+    observer.observe(tile)
+    return () => observer.disconnect()
+  }, [point, animal.hotspots])
   useEffect(() => {
-    if (!selected || !window.matchMedia('(max-width: 1019px)').matches) return
+    if (!selected) return
     note.current?.focus({ preventScroll: true })
-    note.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
+    if (window.matchMedia('(max-width: 1019px)').matches)
+      note.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' })
   }, [selected])
   const close = () => {
     setSelected(null)
@@ -54,50 +110,13 @@ export function AnimalEncounter({
           <h1 id={`${animal.id}-title`}>{animal.commonName}</h1>
           <p className="scientific-name">{animal.scientificName}</p>
         </div>
-        <div
-          className="encounter-note-slot"
-          id={panelId}
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          {point ? (
-            <section
-              ref={note}
-              tabIndex={-1}
-              className="body-note-tile"
-              key={point.id}
-              aria-labelledby={`${panelId}-title`}
-            >
-              <div className="body-note-topline">
-                <span className="micro">
-                  Field detail / 0{animal.hotspots.indexOf(point) + 1}
-                </span>
-                <button
-                  className="icon-button"
-                  aria-label="Close body part note"
-                  title="Close body part note"
-                  onClick={close}
-                >
-                  <X size={17} aria-hidden="true" />
-                </button>
-              </div>
-              <h2 id={`${panelId}-title`}>{point.title}</h2>
-              <p>{point.description}</p>
-              {source && (
-                <a href={source.url} target="_blank" rel="noreferrer">
-                  {source.publisher}
-                  <ExternalLink size={13} aria-hidden="true" />
-                </a>
-              )}
-            </section>
-          ) : (
-            <div className="encounter-introduction">
-              <p className="intro-copy">{animal.introduction}</p>
-              <p className="habitat-label">
-                {animal.habitatLabel} / {animal.region}
-              </p>
-            </div>
-          )}
+        <div className="encounter-note-slot">
+          <div className="encounter-introduction">
+            <p className="intro-copy">{animal.introduction}</p>
+            <p className="habitat-label">
+              {animal.habitatLabel} / {animal.region}
+            </p>
+          </div>
         </div>
         <div className="encounter-actions">
           <button className="primary-button" onClick={() => onOpen('habitat')}>
@@ -122,7 +141,16 @@ export function AnimalEncounter({
           }
         >
           <div
+            ref={photoFrame}
             className="encounter-photo"
+            onPointerDown={(event) => {
+              if (
+                selected &&
+                event.target instanceof Element &&
+                !event.target.closest('.photo-node, .body-note-tile')
+              )
+                close()
+            }}
             style={{
               aspectRatio: `${photo?.width ?? 4} / ${photo?.height ?? 3}`,
             }}
@@ -154,7 +182,7 @@ export function AnimalEncounter({
                   style={{ left: `${item.x}%`, top: `${item.y}%` }}
                   aria-label={`Inspect ${item.title}`}
                   aria-expanded={selected === item.id}
-                  aria-controls={panelId}
+                  aria-controls={selected === item.id ? panelId : undefined}
                   onClick={() =>
                     setSelected(selected === item.id ? null : item.id)
                   }
@@ -165,6 +193,42 @@ export function AnimalEncounter({
                   </span>
                 </button>
               ))}
+            {point && status === 'ready' && (
+              <section
+                ref={note}
+                id={panelId}
+                tabIndex={-1}
+                className="body-note-tile"
+                key={point.id}
+                aria-labelledby={`${panelId}-title`}
+              >
+                <div className="body-note-topline">
+                  <h2 id={`${panelId}-title`}>{point.title}</h2>
+                  <button
+                    className="icon-button"
+                    aria-label="Close body part note"
+                    title="Close body part note"
+                    onClick={close}
+                  >
+                    <X size={16} aria-hidden="true" />
+                  </button>
+                </div>
+                <div
+                  className="body-note-content"
+                  tabIndex={0}
+                  role="region"
+                  aria-label={`${point.title} information`}
+                >
+                  <p>{point.description}</p>
+                </div>
+                {source && (
+                  <a href={source.url} target="_blank" rel="noreferrer">
+                    {source.publisher}
+                    <ExternalLink size={12} aria-hidden="true" />
+                  </a>
+                )}
+              </section>
+            )}
             {(!photo || status !== 'ready') && (
               <div className="encounter-photo-status" role="status">
                 {status === 'error' || !photo ? (

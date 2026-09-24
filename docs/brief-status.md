@@ -6,7 +6,7 @@ The later requests supersede the original panda/lion/mantis list and discovery-f
 
 - Cloned Kylektt/animalpedia; updated the application and README.
 - Central Animalia title, country photography, flags, scroll-driven entrance and searchable 250-country/territory index. Only Australia is enabled.
-- South Australia collection with three scroll-linked photographic species chapters. Nodes open sourced tiles beside the image on desktop and below it on mobile; the image stays unobscured.
+- South Australia collection with three scroll-linked photographic species chapters. Nodes open compact grey-tinted glass tiles inside the photograph on desktop and mobile, with sourced information and image-bounded responsive positioning.
 - Native habitat video, playback controls, failure/retry states, credited media and photographic fallback when footage is unavailable.
 - Three sourced, image-relative anatomy points per species. Anatomy stops video; returning retains the chosen clip and starts paused and muted.
 - Configured video segments bound the seek range and stop at their end. Clip switching retains mute preference within Habitat.

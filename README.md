@@ -41,7 +41,7 @@ Browser tests use Microsoft Edge by default. On a machine without Edge, run `npx
 
 ## Media handoff
 
-**The animal stage now uses real photographs with white body-part nodes.** Each node opens a sourced information tile beside the photograph on desktop and directly below it on mobile, without a modal or covering the image. Close and Escape restore node focus; image failures hide nodes and offer retry. The country entrance keeps its 3D depth animation. Red-kangaroo and sea-lion videos play locally at 1080p; mouse Habitat retains the official Zoos Victoria YouTube embed.
+**The animal stage uses real photographs with white body-part nodes.** Each node opens a small rectangular, grey-tinted glass tile inside the photograph on desktop and mobile. Placement adapts to image bounds and nearby nodes. The introduction stays visible, while long notes scroll within the tile on small screens. Close, Escape or the photograph background dismiss it and restore node focus; image failures hide nodes and offer retry. The country entrance keeps its 3D depth animation. Red-kangaroo and sea-lion videos play locally at 1080p; mouse Habitat retains the official Zoos Victoria YouTube embed.
 
 Country photography and all flags are already included locally under `public/assets/countries/` and `public/assets/flags/`. Per-photo creators, source pages and licences are in `src/data/country-photos.json` and the in-app country index's credits. See [country assets](docs/country-assets.md).
 
@@ -72,7 +72,7 @@ src/
   data/country-photos.json    # Featured photography and attribution
   components/
     DiscoverScreen.tsx        # Scroll gallery and species index
-    AnimalEncounter.tsx       # Habitat photograph, nodes and inline detail tile
+    AnimalEncounter.tsx       # Habitat photograph, nodes and glass detail overlay
     ModelViewer.tsx           # Retained optional viewer; not mounted
     CountryLanding.tsx        # Scroll-driven world entrance
     CountryDirectory.tsx      # Search, country flags and credits
@@ -84,7 +84,7 @@ src/
     Modal.tsx                 # Accessible native dialog
 tests/journey.spec.ts         # Browser acceptance checks
 tests/world.spec.ts           # Country entrance and navigation checks
-tests/photos.spec.ts          # Node alignment, side tiles, focus and photo retry
+tests/photos.spec.ts          # Glass tile bounds, focus, resizing and photo retry
 ```
 
 Dependencies: React, TypeScript, Vite, GSAP + its React hook, Three.js, and Lucide icons. No backend, database or runtime AI. npm's lockfile pins installed versions. Three.js is lazy-loaded for the country scene; its chunk still produces a size warning. Original GLBs are retained as static files but are not requested during the photo experience.
@@ -95,7 +95,7 @@ See [brief completion and remaining media](docs/brief-status.md) for the reconci
 
 Browser acceptance tests cover the world entrance, loaded country photographs, full directory, search, Australia-only activation, browser history, reversible scrolling, all species, modal Escape/focus restoration, reduced motion, missing media, and injected broken-media retry at 1440px and 390px. Test screenshots and traces are written to ignored `test-results/`.
 
-Photo checks cover all nine nodes, desktop-side/mobile-below tile placement, stable photo bounds, no open modal or GLB downloads, keyboard selection, Escape/close focus restoration, failed-image retry, and narrow/short layouts. Country canvas-pixel and reversible-depth tests remain. Original model integrity can still be checked with `node scripts/verify-models.mjs`. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.
+Photo checks cover all nine nodes, glass tiles contained inside the image, stable photo bounds, resizing with an open note, scrollable information, no open modal or GLB downloads, keyboard selection, dismissal/focus restoration, failed-image retry, and narrow/short layouts. Country canvas-pixel and reversible-depth tests remain. Original model integrity can still be checked with `node scripts/verify-models.mjs`. Rendering tests use Chromium/Edge; physical low-end devices and Safari still need release testing.
 
 The kangaroo is a red kangaroo; do not substitute the archive's eastern-grey media. Photo and model points are educational body-region notes, not scientific anatomical segmentation. Wild red-kangaroo footage remains desirable. Mouse playback requires YouTube access; a direct Watch on YouTube link and reload control remain available. Google Fonts is optional; local serif and sans-serif fallbacks keep the interface usable offline. The HD sea-lion film is about 69 MB; production should add adaptive delivery.
 

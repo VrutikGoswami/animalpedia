@@ -110,8 +110,7 @@
   opacity: 1;
 }
 .encounter-note-slot {
-  min-height: 245px;
-  margin: 20px 0;
+  margin: 32px 0;
   display: grid;
   align-items: center;
 }
@@ -123,23 +122,44 @@
 }
 .body-note-tile {
   scroll-margin: 170px 0 80px;
-  position: relative;
-  border: 1px solid #ccd6ca;
-  border-left: 3px solid var(--accent);
-  background: #f0f4ee;
-  border-radius: 4px;
-  padding: 10px 18px 18px;
+  position: absolute;
+  z-index: 4;
+  left: 10px;
+  top: 10px;
+  width: min(260px, calc(100% - 32px));
+  max-height: min(240px, calc(100% - 20px));
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  border: 1px solid #ffffff70;
+  background: rgb(48 51 54 / 72%);
+  -webkit-backdrop-filter: blur(16px) saturate(65%);
+  backdrop-filter: blur(16px) saturate(65%);
+  box-shadow:
+    0 8px 24px #0003,
+    inset 0 1px 0 #ffffff26;
+  border-radius: 5px;
+  padding: 0 14px 12px;
   animation: note-reveal 0.22s ease-out;
+}
+.body-note-tile:focus-visible,
+.body-note-tile :focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+.body-note-content {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff80 transparent;
 }
 .body-note-topline {
   display: flex;
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  color: var(--accent);
-}
-.body-note-topline .micro {
-  font-size: 10px;
+  flex-shrink: 0;
 }
 .body-note-topline .icon-button {
   width: 44px;
@@ -147,13 +167,17 @@
   flex-shrink: 0;
   margin-right: -10px;
 }
+.body-note-topline .icon-button:hover {
+  background: #ffffff20;
+  color: white;
+}
 .body-note-tile h2 {
-  font: 400 29px/1.1 var(--serif);
-  margin: 0 0 12px;
+  font: 400 23px/1.1 var(--serif);
+  margin: 0;
 }
 .body-note-tile p {
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.55;
 }
 .body-note-tile > a {
   display: inline-flex;
@@ -162,7 +186,9 @@
   font-size: 11px;
   text-decoration: underline;
   text-underline-offset: 3px;
-  margin-top: 16px;
+  margin-top: 10px;
+  min-height: 24px;
+  flex-shrink: 0;
 }
 .encounter-photo-status {
   position: absolute;
@@ -180,11 +206,11 @@
 @keyframes note-reveal {
   from {
     opacity: 0;
-    transform: translateX(8px);
+    transform: scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 @media (min-width: 1550px) {
@@ -207,22 +233,7 @@
     font-size: 52px;
   }
   .encounter-note-slot {
-    min-height: 210px;
-    margin: 8px 0;
-  }
-  .body-note-tile {
-    padding: 4px 14px 12px;
-  }
-  .body-note-tile h2 {
-    font-size: 25px;
-    margin-bottom: 8px;
-  }
-  .body-note-tile p {
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  .body-note-tile > a {
-    margin-top: 10px;
+    margin: 24px 0;
   }
 }
 @media (max-width: 1190px) and (min-width: 1020px) {
@@ -255,7 +266,6 @@
   }
   .encounter-note-slot {
     grid-row: 3;
-    min-height: 220px;
     margin: 0;
     align-items: start;
   }
@@ -290,11 +300,21 @@
   .encounter.chapter-body {
     padding-top: 22px;
   }
-  .encounter-note-slot {
-    min-height: 230px;
-  }
   .body-note-tile {
-    width: 100%;
+    width: min(220px, calc(100% - 32px));
+    max-height: min(170px, calc(100% - 20px));
+    padding: 0 12px 8px;
+  }
+  .body-note-tile h2 {
+    font-size: 20px;
+  }
+  .body-note-tile p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .body-note-tile > a {
+    font-size: 10px;
+    margin-top: 6px;
   }
   .encounter-actions {
     display: flex;

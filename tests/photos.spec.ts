@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('photographs open body-part tiles beside the image without a modal or layout shift', async ({
+test('photographs open glass body-part tiles inside the image without a modal or layout shift', async ({
   page,
 }, testInfo) => {
   test.setTimeout(90000)
@@ -52,12 +52,27 @@ test('photographs open body-part tiles beside the image without a modal or layou
       expect(after.x).toBeCloseTo(before!.x, 0)
       expect(after.y + scrollAfter).toBeCloseTo(before!.y + scrollBefore, 0)
       const tileBox = (await tile.boundingBox())!
-      if (testInfo.project.name === 'desktop') {
-        expect(tileBox.x + tileBox.width).toBeLessThanOrEqual(after.x)
-      } else {
-        await expect(tile).toBeInViewport({ ratio: 1 })
-        expect(tileBox.y).toBeGreaterThanOrEqual(after.y + after.height)
-      }
+      expect(tileBox.x).toBeGreaterThanOrEqual(after.x)
+      expect(tileBox.y).toBeGreaterThanOrEqual(after.y)
+      expect(tileBox.x + tileBox.width).toBeLessThanOrEqual(
+        after.x + after.width,
+      )
+      expect(tileBox.y + tileBox.height).toBeLessThanOrEqual(
+        after.y + after.height,
+      )
+      expect(tileBox.width).toBeLessThanOrEqual(260)
+      await expect(tile).toHaveCSS('backdrop-filter', /blur/)
+      await expect(chapter.locator('.encounter-introduction')).toBeVisible()
+      const content = tile.locator('.body-note-content')
+      await content.focus()
+      await content.press('End')
+      await expect
+        .poll(() =>
+          content.evaluate(
+            (el) => el.scrollHeight - el.scrollTop - el.clientHeight,
+          ),
+        )
+        .toBeLessThan(2)
       await page.screenshot({
         path: testInfo.outputPath(`photo-${index}-node-${n}.png`),
       })
@@ -65,7 +80,6 @@ test('photographs open body-part tiles beside the image without a modal or layou
       await expect(tile).toHaveCount(0)
       await expect(node).toBeFocused()
     }
-    await nodes.first().click()
     await nodes.last().click()
     await expect(chapter.locator('.body-note-tile')).toHaveCount(1)
     await expect(nodes.first()).toHaveAttribute('aria-expanded', 'false')
@@ -103,7 +117,7 @@ test('failed photograph hides nodes and can be retried', async ({ page }) => {
   await expect(chapter.locator('.photo-node')).toHaveCount(3)
 })
 
-test('short and narrow viewports keep notes and actions in document flow', async ({
+test('glass tiles stay inside photographs on short and narrow viewports', async ({
   page,
 }) => {
   for (const viewport of [
@@ -120,6 +134,11 @@ test('short and narrow viewports keep notes and actions in document flow', async
     await chapter.locator('.body-note-tile').scrollIntoViewIfNeeded()
     await expect(chapter.locator('.body-note-tile')).toBeInViewport()
     const tile = (await chapter.locator('.body-note-tile').boundingBox())!
+    const image = (await chapter.locator('.encounter-photo').boundingBox())!
+    expect(tile.x).toBeGreaterThanOrEqual(image.x)
+    expect(tile.y).toBeGreaterThanOrEqual(image.y)
+    expect(tile.x + tile.width).toBeLessThanOrEqual(image.x + image.width)
+    expect(tile.y + tile.height).toBeLessThanOrEqual(image.y + image.height)
     const actions = (await chapter.locator('.encounter-actions').boundingBox())!
     expect(actions.y).toBeGreaterThanOrEqual(tile.y + tile.height)
     expect(
@@ -128,4 +147,26 @@ test('short and narrow viewports keep notes and actions in document flow', async
       ),
     ).toBe(true)
   }
+})
+
+test('an open glass tile repositions when the viewport changes and dismisses on the photograph', async ({
+  page,
+}) => {
+  await page.goto('/#australia')
+  const chapter = page.locator('.animal-chapter').first()
+  await chapter.locator('.photo-node').first().click()
+  for (const width of [320, 768, 1440, 1920]) {
+    await page.setViewportSize({ width, height: 900 })
+    await page.waitForTimeout(750)
+    const tile = (await chapter.locator('.body-note-tile').boundingBox())!
+    const photo = (await chapter.locator('.encounter-photo').boundingBox())!
+    expect(tile.x).toBeGreaterThanOrEqual(photo.x)
+    expect(tile.y).toBeGreaterThanOrEqual(photo.y)
+    expect(tile.x + tile.width).toBeLessThanOrEqual(photo.x + photo.width)
+    expect(tile.y + tile.height).toBeLessThanOrEqual(photo.y + photo.height)
+  }
+  await chapter
+    .locator('.encounter-photo > img')
+    .click({ position: { x: 3, y: 3 } })
+  await expect(chapter.locator('.body-note-tile')).toHaveCount(0)
 })

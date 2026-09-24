@@ -2,7 +2,7 @@
 
 ## Current photo experience
 
-The latest brief replaces the animal model stage with habitat photography and inline side tiles. `AnimalEncounter.tsx` uses `media.discovery` and the same `animal.hotspots` as Anatomy. Keep Discovery and Anatomy on the same complete, uncropped photograph; update all percentages whenever replacing it. `Still.width` and `Still.height` reserve the image ratio while loading; `Still.caption` records observation location and any uncertainty. Credit, source and licence remain visible beneath each image. Original GLBs and their viewer below are retained for optional reuse, not mounted in the current interface.
+The latest brief uses habitat photography with small grey-tinted glass information tiles inside the image. `AnimalEncounter.tsx` uses `media.discovery` and the same `animal.hotspots` as Anatomy. Keep Discovery and Anatomy on the same complete, uncropped photograph; update all percentages whenever replacing it. `Still.width` and `Still.height` reserve the image ratio while loading; `Still.caption` records observation location and any uncertainty. Tile placement adapts to image bounds and nearby nodes; short mobile images allow the note body to scroll. Credit, source and licence remain visible beneath each image. Original GLBs and their viewer below are retained for optional reuse, not mounted in the current interface.
 
 Current photography: Donald Hobern's red kangaroos at Brookfield Conservation Park; Stephen Michael Barnett's naturally coloured hopping mice (location and wild status unverified); Peterdownunder's sea lion at Seal Bay. A verified wild mouse photograph remains a useful future replacement. Video integration is unchanged. The 3D notes below describe the retained implementation, not the active photo stage.
 
